@@ -1,83 +1,95 @@
 <template>
     
-    <div class="searchbar-container">
+    <div class="divBody">
+    <div class="divContainer">
 
-            <div class="entryarea">
-                <input type="text" class="form-Components">
-                 <div class="labelline">From</div>
-            </div>
+        <div class="inputBox">
+            <input type="text" required="required">
+            <span>From</span>
+        </div>
 
-            
+        
+        <div class="inputBox">
+            <input type="text" required="required">
+            <span>TO</span>
+        </div>
+
+        <div class="inputBox">
+            <input type="text" required="required">
+            <span>Date</span>
+        </div>
     </div>
-    
+
+</div>  
+
 </template>
 
 
 <style>
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
 
-.searchbar-container{
-    background-color:#1c2841;
-    height: 300px;
-    width: 650px;
+
+.divBody{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-.form-Components{
-    height: 40px;
-    width: 100px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.entryarea{
-    position: relative;
-    height: 80px;
-    line-height: 80px;
-
-}
-
-input{
-    position: absolute;
-    width: 100%;
-    outline: none;
-    font-size: 2.2em;
-    padding: 0 30px;
-    line-height: 80px;
+    height: 250px;
+    width: 500px;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #1d2b3a;
+    padding: 25px;
     border-radius: 10px;
-    border: 2px solid #f0ffff;
-    background: transparent;
-    transition: 0.1s ease;
-    z-index: 1111;
+
 }
 
-.labelline{
+.divContainer{
+    display: flex;
+}
+
+.inputBox{
+    position: relative;
+    width: 200x;
+    margin-right: 8.3px;
+}
+
+.inputBox input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: #1d2b3a;
+    border-radius: 5px;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+
+}
+
+.inputBox span{
     position: absolute;
-   font-size: 1.6em;
-   color: #f0ffff;
-   padding: 0 25px;
-   margin: 0 20px;
-    background-color: #1c2841;
-    transition: 0.2s ease;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    transition: 0.5s;
 }
 
-input:focus  ,input:valid 
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span
 {
-    color: #f0ffff;
-    border: 4px solid #f0ffff;
+    color: #00dfc4;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background: #1d2b3a;
 }
-input:focus + .labelline  ,input:valid +.labelline 
-{
-    color: #f0ffff;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 12px ;
-    transform: translate(-15px, -16px) scale(0.88);
-    z-index: 1111;
-}
+
 </style>
