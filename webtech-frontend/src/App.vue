@@ -1,15 +1,17 @@
 <template>
-  <Searchbar/>
+ 
+  <contactform/>
 </template>
 
 <script>
 import Searchbar from "./components/searchbar.vue"
+import contactform from "./components/contactform.vue";
 
 export default {
   
   name: 'App',
   components: {
-    Searchbar
+    Searchbar, contactform
   }
   
 }
