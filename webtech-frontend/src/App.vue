@@ -1,7 +1,15 @@
 <template>
  
+
   <contactform/>
+
+
+
+  <Searchbar/>
+
+
 </template>
+
 
 <script>
 import Searchbar from "./components/searchbar.vue"

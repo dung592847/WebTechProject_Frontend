@@ -71,7 +71,7 @@
 
 </template>
 
-<style> 
+<style scoped> 
 
 .divBody {
     height: 100vh;
