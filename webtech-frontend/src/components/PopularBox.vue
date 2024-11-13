@@ -4,7 +4,7 @@
       <h2 class="section__header">Popular Hotels</h2>
       <div class="popular__grid">
         <div class="popular__card">
-          <img src="assets/hotel-1.jpg" alt="popular hotel" />
+          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>The Plaza Hotel</h4>
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <img src="assets/hotel-2.jpg" alt="popular hotel" />
+           <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Ritz Paris</h4>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <img src="assets/hotel-3.jpg" alt="popular hotel" />
+          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>The Peninsula</h4>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <img src="assets/hotel-4.jpg" alt="popular hotel" />
+          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Atlantis The Palm</h4>
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <img src="assets/hotel-5.jpg" alt="popular hotel" />
+          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>The Ritz-Carlton</h4>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <img src="assets/hotel-6.jpg" alt="popular hotel" />
+           <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Marina Bay Sands</h4>
@@ -67,3 +67,44 @@
     </section>
 
 </template>
+
+
+<style>
+
+
+
+.popular__grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.popular__card {
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.popular__content {
+  padding: 1rem;
+}
+
+.popular__card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.popular__card__header h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.popular__content p {
+  color: var(--text-light);
+}
+</style>

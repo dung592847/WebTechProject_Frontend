@@ -9,8 +9,18 @@
         </div>
         <Searchbar></Searchbar>
       </div>
-    </header>
 
+     
+      <div class="popularDiv">
+        <PopularBox></PopularBox>
+      </div>
+
+      
+        
+      
+      
+    </header>
+    <FooterComponent/> 
 
 </template>
 
@@ -18,13 +28,17 @@
 // @ is an alias to /src
 import NavHeader from "../components/NavHeader.vue"
 import Searchbar from "../components/Searchbar.vue"
+import PopularBox from "../components/PopularBox.vue"
+import FooterComponent from "../components/FooterComponent.vue"
 
 export default {
   
   name: 'HomeView',
   components: {
     NavHeader,
-    Searchbar
+    Searchbar,
+    PopularBox,
+    FooterComponent
   }
 }
 </script>
@@ -105,5 +119,18 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 2rem;
+}
+
+
+.section__header {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.popularDiv{
+  margin-top: 180px;
+  margin-bottom: 180px;
 }
 </style>
