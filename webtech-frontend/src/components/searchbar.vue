@@ -1,95 +1,125 @@
 <template>
     
-    <div class="divBody">
-    <div class="divContainer">
-
-        <div class="inputBox">
-            <input type="text" required="required">
-            <span>From</span>
+    <div class="booking__container">
+          <form>
+            <div class="form__group">
+              <div class="input__group">
+                <input type="text" required/>
+                <label>From</label>
+              </div>
+              <p>Where are you going?</p>
+            </div>
+            <div class="form__group">
+              <div class="input__group">
+                <input type="text" required/>
+                <label>To</label>
+              </div>
+              <p>Add date</p>
+            </div>
+            <div class="form__group">
+              <div class="input__group">
+                <input type="text" required/>
+                <label>Check Out</label>
+              </div>
+              <p>Add date</p>
+            </div>
+            <div class="form__group">
+              <div class="input__group">
+                <input type="text" required/>
+                <label>Guests</label>
+              </div>
+              <p>Add guests</p>
+            </div>
+          </form>
+          <button class="btn"><i class="ri-search-line"></i></button>
         </div>
-
-        
-        <div class="inputBox">
-            <input type="text" required="required">
-            <span>TO</span>
-        </div>
-
-        <div class="inputBox">
-            <input type="text" required="required">
-            <span>Date</span>
-        </div>
-    </div>
-
-</div>  
 
 </template>
 
 
 <style scoped>
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
+
+.booking__container {
+  position: absolute;
+  bottom: -5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 6rem);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 2rem;
+  border-radius: 2rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+}
+
+.booking__container form {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.booking__container .input__group {
+  width: 100%;
+  position: relative;
+}
+
+.booking__container label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.booking__container input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid var(--primary-color);
+  color: var(--text-dark);
+}
+
+.booking__container input:focus ~ label {
+  font-size: 0.8rem;
+  top: 0;
+}
+
+.booking__container .form__group p {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+.booking__container .btn {
+  padding: 1rem;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.booking__container .btn:hover {
+  background-color: var(--primary-color-dark);
 }
 
 
-.divBody{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 250px;
-    width: 500px;
-    flex-direction: column;
-    gap: 30px;
-    background-color: #1d2b3a;
-    padding: 25px;
-    border-radius: 10px;
-
-}
-
-.divContainer{
-    display: flex;
-}
-
-.inputBox{
-    position: relative;
-    width: 200x;
-    margin-right: 8.3px;
-}
-
-.inputBox input{
-    width: 100%;
-    padding: 10px;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: #1d2b3a;
-    border-radius: 5px;
-    outline: none;
-    color: #fff;
-    font-size: 1em;
-
-}
-
-.inputBox span{
-    position: absolute;
-    left: 0;
-    padding: 10px;
-    pointer-events: none;
-    font-size: 1em;
-    color: rgba(255,255,255,0.25);
-    text-transform: uppercase;
-    transition: 0.5s;
-}
-
-.inputBox input:valid ~ span,
-.inputBox input:focus ~ span
-{
-    color: #00dfc4;
-    transform: translateX(10px) translateY(-7px);
-    font-size: 0.65em;
-    padding: 0 10px;
-    background: #1d2b3a;
-}
 
 </style>
