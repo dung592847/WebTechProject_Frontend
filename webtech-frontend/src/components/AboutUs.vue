@@ -14,7 +14,7 @@
                 ratione pariatur iusto quas nisi dolores ullam, praesentium id.</p>
             </div>
             <div class="dev-picture">
-                <img src="https://placehold.co/600x400" alt="Picture of Dev 1">
+                <img src="../assets/mike_wazowski.jpg">
             </div>
         </div>
         <div class="dev-two">
@@ -24,7 +24,7 @@
                 ratione pariatur iusto quas nisi dolores ullam, praesentium id.</p>
             </div>
             <div class="dev-picture">
-                <img src="https://placehold.co/600x400" alt="Picture of Dev 2">
+                <img src="../assets/sullivan.jpg" alt="Picture of Dev 2">
             </div>
         </div>
     </div>
@@ -107,5 +107,10 @@ h1{
     padding: 30px;
 }
 
+img{
+    height: 200px;
+    width: 200px;
+    border-radius: 5px;
+}
 
 </style>
