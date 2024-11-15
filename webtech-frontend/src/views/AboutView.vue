@@ -159,6 +159,7 @@ export default {
   align-items: center;
   flex-direction: column;
   background: #fff;
+  border-color: #435681;
   margin: 10px 4px;
   
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);

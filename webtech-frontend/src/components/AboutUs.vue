@@ -10,8 +10,7 @@
     <div class="dev-boxes">
         <div class="dev-one">
             <h1>Dev 1</h1>
-            <div class="dev-text"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt aperiam quo veritatis sapiente maxime alias aliquam molestiae voluptatum amet optio corporis 
-                ratione pariatur iusto quas nisi dolores ullam, praesentium id.</p>
+            <div class="dev-text"><p>Face Everything And Rise.</p>
             </div>
             <div class="dev-picture">
                 <img src="../assets/mike_wazowski.jpg">
@@ -20,8 +19,7 @@
         <div class="dev-two">
             <h1>Dev 2</h1>
             <div class="dev-text">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt aperiam quo veritatis sapiente maxime alias aliquam molestiae voluptatum amet optio corporis 
-                ratione pariatur iusto quas nisi dolores ullam, praesentium id.</p>
+                <p>Forget Everything And Run.</p>
             </div>
             <div class="dev-picture">
                 <img src="../assets/sullivan.jpg" alt="Picture of Dev 2">
