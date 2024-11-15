@@ -1,13 +1,13 @@
 <template>
 
 <section class="section__container popular__container">
-      <h2 class="section__header">Popular Hotels</h2>
+      <h2 class="section__header">Popular Flight Destinations</h2>
       <div class="popular__grid">
         <div class="popular__card">
           <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
-              <h4>The Plaza Hotel</h4>
+              <h4>Generic Flight 1</h4>
               <h4>$499</h4>
             </div>
             <p>New York City, USA</p>
@@ -17,7 +17,7 @@
            <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
-              <h4>Ritz Paris</h4>
+              <h4>Generic Flight 2</h4>
               <h4>$549</h4>
             </div>
             <p>Paris, France</p>
@@ -30,14 +30,14 @@
               <h4>The Peninsula</h4>
               <h4>$599</h4>
             </div>
-            <p>Hong Kong</p>
+            <p>Generic Flight 3</p>
           </div>
         </div>
         <div class="popular__card">
           <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
-              <h4>Atlantis The Palm</h4>
+              <h4>Generic Flight 4</h4>
               <h4>$449</h4>
             </div>
             <p>Dubai, United Arab Emirates</p>
@@ -47,7 +47,7 @@
           <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
-              <h4>The Ritz-Carlton</h4>
+              <h4>Generic Flight 5</h4>
               <h4>$649</h4>
             </div>
             <p>Tokyo, Japan</p>
@@ -57,7 +57,7 @@
            <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
           <div class="popular__content">
             <div class="popular__card__header">
-              <h4>Marina Bay Sands</h4>
+              <h4>Generic Flight 6</h4>
               <h4>$549</h4>
             </div>
             <p>Singapore</p>
@@ -87,7 +87,7 @@
 }
 
 .popular__content {
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .popular__card__header {

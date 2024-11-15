@@ -7,19 +7,19 @@
                 <input type="text" required/>
                 <label>From</label>
               </div>
-              <p>Where are you going?</p>
+              <p>From where are you going?</p>
             </div>
             <div class="form__group">
               <div class="input__group">
                 <input type="text" required/>
                 <label>To</label>
               </div>
-              <p>Add date</p>
+              <p>Where are you going?</p>
             </div>
             <div class="form__group">
               <div class="input__group">
                 <input type="text" required/>
-                <label>Check Out</label>
+                <label>Duration</label>
               </div>
               <p>Add date</p>
             </div>

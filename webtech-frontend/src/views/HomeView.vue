@@ -1,11 +1,17 @@
 <template>
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
   <NavHeader></NavHeader>
 
   <header class="section__container header__container">
       <div class="header__image__container">
         <div class="header__content">
           <h1>Enjoy Your Dream Vacation</h1>
-          <p>Book Hotels, Flights and stay packages at lowest price.</p>
+          <p>Book Flights and stay packages at lowest price.</p>
         </div>
         <Searchbar></Searchbar>
       </div>
@@ -55,7 +61,7 @@ export default {
   --text-light: #767268;
   --extra-light: #f3f4f6;
   --white: #ffffff;
-  --max-width: 1200px;
+  --max-width: 1400px; /**Width changeable here */
 }
 
 * {
@@ -80,7 +86,8 @@ body {
 .section__container {
   max-width: var(--max-width);
   margin: auto;
-  padding: 5rem 1rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .header__container {
