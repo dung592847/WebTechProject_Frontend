@@ -40,6 +40,7 @@
     height: 450px;
     text-align: center;
     padding: 60px;
+    
 }
 
 h1{

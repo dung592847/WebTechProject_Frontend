@@ -1,7 +1,7 @@
 <template>
  
   <router-view/>
-  <contactform/>
+
 </template>
 
 <style>

@@ -1,27 +1,71 @@
 <template>
-    <div class="seat-container">
-        <div class="row" v-for="(row, rowIndex) in rows" :key="rowIndex">
-            <!-- Linke Sitzreihe -->
-            <div 
-                class="seat" 
-                v-for="(seat, seatIndex) in row.slice(0, 3)" 
-                :key="seatIndex"
-                :class="{ selected: isSelected(rowIndex, seatIndex) }"
-                @click="toggleSeat(rowIndex, seatIndex)"
-            >
-                {{ seat }}
+    <div class="seat-selection">
+        <h1 class="title">Bitte wählen Sie einen Sitzplatz aus</h1>
+
+        <!-- Sitzbereiche -->
+        <div class="seat-section">
+            <div class="cabin-label business-label">Business Class</div>
+            <div class="cabin-label economy-label">Economy Class</div>
+            
+            <div class="seat-container">
+                <div class="row" v-for="(row, rowIndex) in rows" :key="rowIndex">
+                    <!-- Linke Sitzgruppe (ABC) -->
+                    <div class="seat-group left">
+                        <div 
+                            v-for="letter in ['A', 'B', 'C']" 
+                            :key="letter"
+                            class="seat"
+                            :class="{ 
+                                selected: isSelected(`${rowIndex + 1}${letter}`), 
+                                occupied: isOccupied(`${rowIndex + 1}${letter}`),
+                                business: rowIndex < 2
+                            }"
+                            @click="toggleSeat(`${rowIndex + 1}${letter}`)"
+                        >
+                            {{ rowIndex + 1 }}{{ letter }}
+                        </div>
+                    </div>
+
+                    <!-- Gang -->
+                    <div class="aisle"></div>
+
+                    <!-- Rechte Sitzgruppe (DEF) -->
+                    <div class="seat-group right">
+                        <div 
+                            v-for="letter in ['D', 'E', 'F']" 
+                            :key="letter"
+                            class="seat"
+                            :class="{ 
+                                selected: isSelected(`${rowIndex + 1}${letter}`), 
+                                occupied: isOccupied(`${rowIndex + 1}${letter}`),
+                                business: rowIndex < 2
+                            }"
+                            @click="toggleSeat(`${rowIndex + 1}${letter}`)"
+                        >
+                            {{ rowIndex + 1 }}{{ letter }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Gang zwischen den Sitzen -->
-            <div class="aisle"></div>
-            <!-- Rechte Sitzreihe -->
-            <div 
-                class="seat" 
-                v-for="(seat, seatIndex) in row.slice(3, 6)" 
-                :key="seatIndex + 3"
-                :class="{ selected: isSelected(rowIndex, seatIndex + 3) }"
-                @click="toggleSeat(rowIndex, seatIndex + 3)"
-            >
-                {{ seat }}
+        </div>
+
+        <!-- Erweiterte Legende -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="seat unselected"></div>
+                <span>Unbesetzt</span>
+            </div>
+            <div class="legend-item">
+                <div class="seat occupied"></div>
+                <span>Besetzt</span>
+            </div>
+            <div class="legend-item">
+                <div class="seat selected"></div>
+                <span>Ausgewählt</span>
+            </div>
+            <div class="legend-item">
+                <div class="seat business"></div>
+                <span>Business Class</span>
             </div>
         </div>
     </div>
@@ -31,86 +75,169 @@
 export default {
     data() {
         return {
-            rows: [
-                ["1A", "1B", "1C", "1D", "1E", "1F"],
-                ["2A", "2B", "2C", "2D", "2E", "2F"],
-                ["3A", "3B", "3C", "3D", "3E", "3F"],
-                ["4A", "4B", "4C", "4D", "4E", "4F"],
-                ["5A", "5B", "5C", "5D", "5E", "5F"],
-                ["6A", "6B", "6C", "6D", "6E", "6F"],
-                ["7A", "7B", "7C", "7D", "7E", "7F"],
-                ["8A", "8B", "8C", "8D", "8E", "8F"],
-                ["9A", "9B", "9C", "9D", "9E", "9F"],
-                ["10A", "10B", "10C", "10D", "10E", "10F"],
-                ["11A", "11B", "11C", "11D", "11E", "11F"],
-                ["12A", "12B", "12C", "12D", "12E", "12F"],
-                ["13A", "13B", "13C", "13D", "13E", "13F"],
-                ["14A", "14B", "14C", "14D", "14E", "14F"],
-                ["15A", "15B", "15C", "15D", "15E", "15F"],
-                ["16A", "16B", "16C", "16D", "16E", "16F"],
-                ["17A", "17B", "17C", "17D", "17E", "17F"]
-            ],
-            selectedSeats: []
+            rows: Array.from({ length: 10 }, (_, i) => i), // 0-9 für Reihen 1-10
+            selectedSeats: [],
+            occupiedSeats: ["2B", "5D", "6C", "9E"] // Beispielhaft besetzte Sitzplätze
         };
     },
     methods: {
-        toggleSeat(row, seat) {
-            const seatId = `${row}-${seat}`;
+        toggleSeat(seatId) {
+            if (this.isOccupied(seatId)) return; // Keine Aktion bei besetzten Sitzen
             if (this.selectedSeats.includes(seatId)) {
                 this.selectedSeats = this.selectedSeats.filter(id => id !== seatId);
             } else {
                 this.selectedSeats.push(seatId);
             }
         },
-        isSelected(row, seat) {
-            return this.selectedSeats.includes(`${row}-${seat}`);
+        isSelected(seatId) {
+            return this.selectedSeats.includes(seatId);
+        },
+        isOccupied(seatId) {
+            return this.occupiedSeats.includes(seatId);
         }
     }
 };
 </script>
 
 <style scoped>
-/* Container für die Sitzplatz-Auswahl */
+.seat-selection {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color : #435681;
+}
+
+.seat-section {
+    margin: 30px auto;
+    border: 1px solid #435681;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    background-color: white;
+    position: relative;
+}
+
+/* Neue Cabin Labels */
+.cabin-label {
+    position: absolute;
+    left: -120px;
+    font-weight: bold;
+    text-align: right;
+    width: 100px;
+}
+
+.business-label {
+    top: 25px;
+    color: #435681;
+}
+
+.economy-label {
+    top: 120px;
+    color: #435681;
+}
+
 .seat-container {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 3 Sitze links, 1 Gang, 3 Sitze rechts */
-    gap: 10px;
-    width: 350px;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-/* Jede Reihe */
 .row {
-    display: contents;
-    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Sitzplatz */
+.seat-group {
+    display: flex;
+    gap: 8px;
+}
+
+.aisle {
+    width: 30px;
+}
+
 .seat {
-    width: 50px;
-    height: 50px;
-    background-color: #ddd;
+    width: 45px;
+    height: 45px;
+    background-color: #ffffff;
     border-radius: 5px;
     cursor: pointer;
-    text-align: center;
-    line-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    font-size: 0.9em;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Stil für ausgewählten Sitzplatz */
+.seat.business {
+    background-color: #f4f4f4;
+    border: 2px solid #435681;
+}
+
+.seat.occupied {
+    background-color: #ff0000;
+    color: white;
+    cursor: not-allowed;
+}
+
 .seat.selected {
-    background-color: #6c3;
+    background-color: #66cc33;
     color: white;
 }
 
-/* Gang zwischen den Sitzreihen */
-.aisle {
-    width: 10px;
+.seat:hover:not(.occupied) {
+    background-color: #d0d0d0;
 }
 
-/* Optional: Hover-Effekt */
-.seat:hover {
-    background-color: #ccc;
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-item .seat {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.legend-item span {
+    font-size: 0.9em;
+}
+
+.unselected {
+    background-color: #e9e9e9;
+}
+
+.occupied {
+    background-color: #ff0000;
+}
+
+.selected {
+    background-color: #66cc33;
+}
+
+/* Style für Business Class Sitze in der Legende */
+.legend-item .seat.business {
+    background-color: #f4f4f4;
+    border: 2px solid #435681;
 }
 </style>
