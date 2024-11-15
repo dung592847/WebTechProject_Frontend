@@ -68,6 +68,7 @@
 .booking__container .input__group {
   width: 100%;
   position: relative;
+  
 }
 
 .booking__container label {
@@ -75,11 +76,12 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--text-dark);
   pointer-events: none;
   transition: 0.3s;
+
 }
 
 .booking__container input {

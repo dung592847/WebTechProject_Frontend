@@ -61,7 +61,7 @@ export default {
   --text-light: #767268;
   --extra-light: #f3f4f6;
   --white: #ffffff;
-  --max-width: 1400px; /**Width changeable here */
+  --max-width: 1400px; /**Width changeable */
 }
 
 * {
