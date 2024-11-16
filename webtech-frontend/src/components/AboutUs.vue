@@ -92,12 +92,15 @@ h1{
     
     width: 50%;
     float: right;
+
     
 }
 
 .dev-picture  ~ img{
     width: 100%;
     height: 100%;
+    
+
 }
 
 .dev-text {
@@ -111,6 +114,7 @@ img{
     height: 200px;
     width: 200px;
     border-radius: 5px;
+  
 }
 
 </style>
