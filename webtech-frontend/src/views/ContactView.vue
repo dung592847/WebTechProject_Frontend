@@ -11,7 +11,7 @@
   import FooterComponent from "../components/FooterComponent.vue"
 import AirplaneSeats from "@/components/AirplaneSeats.vue";
 import Contactform from "@/components/Contactform.vue";
-
+ 
   
   export default {
     
@@ -20,7 +20,7 @@ import Contactform from "@/components/Contactform.vue";
       NavHeader,
       AirplaneSeats,
       Contactform,
-      FooterComponent,
+      FooterComponent
     }
   }
   </script>

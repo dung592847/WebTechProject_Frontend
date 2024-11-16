@@ -13,7 +13,7 @@
 
     <router-link to="/about">About</router-link>
 
-<style>
+<style scoped>
 nav {
   max-width: var(--max-width);
   margin: auto;

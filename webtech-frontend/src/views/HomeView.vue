@@ -1,10 +1,4 @@
 <template>
-  <head>
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-  </head>
   <NavHeader></NavHeader>
 
   <header class="section__container header__container">

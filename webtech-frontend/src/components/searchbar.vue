@@ -1,5 +1,10 @@
 <template>
-    
+    <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
     <div class="booking__container">
           <form>
             <div class="form__group">
@@ -31,7 +36,9 @@
               <p>Add guests</p>
             </div>
           </form>
-          <button class="btn"><i class="ri-search-line"></i></button>
+         
+          <router-link to="/search-result"><button class="btn"><i class="ri-search-line"></i></button></router-link>
+          <!--Add @click Function later-->
         </div>
 
 </template>

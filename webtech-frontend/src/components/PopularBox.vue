@@ -69,7 +69,7 @@
 </template>
 
 
-<style>
+<style scoped>
 
 
 

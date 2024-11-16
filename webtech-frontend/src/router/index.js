@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ContactView from '../views/ContactView.vue'
+import SearchResultView from '../views/SearchResultView.vue'
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     name: 'contact-us',
     component: ContactView
   },
+  {
+    path: '/search-result',
+    name: 'search-result',
+    component: SearchResultView
+  }
 ]
 
 const router = createRouter({
