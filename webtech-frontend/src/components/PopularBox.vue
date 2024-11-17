@@ -4,7 +4,7 @@
       <h2 class="section__header">Popular Flight Destinations</h2>
       <div class="popular__grid">
         <div class="popular__card">
-          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
+          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Generic Flight 1</h4>
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="popular__card">
-           <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
+          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Generic Flight 2</h4>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
+          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>The Peninsula</h4>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
+          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Generic Flight 4</h4>
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="popular__card">
-          <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
+          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Generic Flight 5</h4>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="popular__card">
-           <!--<img src="assets/hotel-1.jpg" alt="popular hotel" />-->
+           <img src="https://placehold.co/600x400" alt="popular flight destinations" />
           <div class="popular__content">
             <div class="popular__card__header">
               <h4>Generic Flight 6</h4>

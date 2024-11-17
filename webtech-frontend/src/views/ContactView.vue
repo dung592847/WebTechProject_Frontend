@@ -1,7 +1,6 @@
 <template>
     <NavHeader></NavHeader>
-    <AirplaneSeats></AirplaneSeats>
-    <Contactform></Contactform>
+    
   <FooterComponent></FooterComponent>
   </template>
   

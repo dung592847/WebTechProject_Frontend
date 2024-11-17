@@ -11,8 +11,8 @@
             <div class="additionalInfo">
                 <h2>🛫------1:30h------🛬</h2>
                 <h2>200€</h2>
-              <h2 class="view-details">View Details</h2>
-               
+             
+              <router-link to="/flight-details"> <h2 class="view-details">View Details</h2></router-link>     
             </div>
             <div class="endInfo">
                 <h2>16:30</h2>
@@ -36,7 +36,7 @@
         display: flex;
         justify-content: space-evenly; /**horizontale zentrierung */
         align-items: center;  /**vertikale zentrierung */
-        max-width: 900px;
+        max-width: 1000px;
         height: 200px;
         border-radius: 5px;
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
@@ -55,10 +55,7 @@
         border-right: solid 1px;
     }
 
-    .endInfo{
-        
-    }
-
+ 
     .startInfo,
     .additionalInfo,
     .endInfo{
