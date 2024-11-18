@@ -1,6 +1,6 @@
 <template>
     <NavHeader></NavHeader>
-    
+    <ContactUs></ContactUs> 
   <FooterComponent></FooterComponent>
   </template>
   
@@ -10,6 +10,7 @@
   import FooterComponent from "../components/FooterComponent.vue"
 import AirplaneSeats from "@/components/AirplaneSeats.vue";
 import Contactform from "@/components/Contactform.vue";
+import ContactUs from "@/components/ContactUs.vue";
  
   
   export default {
@@ -17,8 +18,7 @@ import Contactform from "@/components/Contactform.vue";
     name: 'HomeView',
     components: {
       NavHeader,
-      AirplaneSeats,
-      Contactform,
+      ContactUs,
       FooterComponent
     }
   }
