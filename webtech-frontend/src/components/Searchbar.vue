@@ -9,28 +9,28 @@
           <form>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required/>
+                <input type="text"  required  placeholder=" "/>
                 <label>From</label>
               </div>
               <p>From where are you going?</p>
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required/>
+                <input type="text" required  placeholder=" "/>
                 <label>To</label>
               </div>
               <p>Where are you going?</p>
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required/>
+                <input type="date" required placeholder=" " />
                 <label>Duration</label>
               </div>
               <p>Add date</p>
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required/>
+                <input type="text" required  placeholder=" "/>
                 <label>Guests</label>
               </div>
               <p>Add guests</p>
@@ -42,6 +42,18 @@
         </div>
 
 </template>
+
+
+<script>
+  
+  
+
+
+    
+  
+
+
+</script>
 
 
 <style scoped>
@@ -130,5 +142,11 @@
 }
 
 
+.booking__container input:focus ~ label,
+.booking__container input:not(:placeholder-shown) ~ label {
+  font-size: 0.8rem;
+  top: 0;
+  color: var(--primary-color); /* Optional: Farbe ändern */
+}
 
 </style>

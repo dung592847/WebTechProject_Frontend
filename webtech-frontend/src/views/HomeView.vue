@@ -7,7 +7,9 @@
           <h1>Enjoy Your Dream Vacation</h1>
           <p>Book Flights and stay packages at lowest price.</p>
         </div>
-        <Searchbar></Searchbar>
+        <Searchbar ></Searchbar>
+        
+     
       </div>
 
      
@@ -58,10 +60,15 @@ export default {
   --max-width: 1400px; /**Width changeable */
 }
 
+body{
+  /**background-color: #a6c3da63;*/
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 a {
