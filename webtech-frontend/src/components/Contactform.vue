@@ -1,5 +1,5 @@
 <template>
-    <div class="divBody">
+    
       <div class="divBody2">
         <div class="title">Contact</div>
         <form action="#">
@@ -65,7 +65,7 @@
           </div>
         </form>
       </div>
-    </div>
+   
   </template>
   
   <script>

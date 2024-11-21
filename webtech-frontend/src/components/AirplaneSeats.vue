@@ -103,6 +103,7 @@ export default {
 .seat-selection {
     text-align: center;
     padding: 20px;
+    padding-top: 0px;
 }
 
 .title {
@@ -124,10 +125,12 @@ export default {
 /* Neue Cabin Labels */
 .cabin-label {
     position: absolute;
-    left: -120px;
+    margin-top: 50px;
+    left: 0px;
     font-weight: bold;
     text-align: right;
     width: 100px;
+   transform: rotate(-45deg);
 }
 
 .business-label {

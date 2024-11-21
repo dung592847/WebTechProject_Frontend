@@ -1,7 +1,17 @@
 <template>
   <NavHeader></NavHeader>
+<div class="searchresult-wrapper">
   <SearchResultBox></SearchResultBox>
-  <SeatAndContactForm></SeatAndContactForm>
+
+</div>
+
+  <div class="component-wrapper">
+
+   
+    <SeatAndContactForm></SeatAndContactForm>
+
+  </div>
+
 <FooterComponent></FooterComponent>
 </template>
 
@@ -24,3 +34,19 @@ export default {
   }
 }
 </script>
+
+<style>
+.component-wrapper{
+  display: flex;
+  justify-content: center;
+ 
+}
+
+.searchresult-wrapper{
+  display: flex;
+  justify-content: center;
+  width:1400px;
+  margin: auto;
+}
+
+</style>
