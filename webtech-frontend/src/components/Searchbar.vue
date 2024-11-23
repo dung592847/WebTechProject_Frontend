@@ -10,6 +10,11 @@
             <div class="form__group">
               <div class="input__group">
                 <input type="text" @keyup="handleDepartureAutocomplete" required  v-model="departure_city" placeholder=" "/>
+                <div class="autocomplete">
+                  <div class="autocomplete-" v-for="i in departure_city_result.length" :key="i">
+                    <p>{{ departure_city_result[i] }}</p>
+                  </div>
+                </div>
                 <label>From</label>
               </div>
               <p>From where are you going?</p>
