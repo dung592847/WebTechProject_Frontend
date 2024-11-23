@@ -9,14 +9,14 @@
           <form>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" @keyup="handleAutocomplete" required  v-model="departure_city" placeholder=" "/>
+                <input type="text" @keyup="handleDepartureAutocomplete" required  v-model="departure_city" placeholder=" "/>
                 <label>From</label>
               </div>
               <p>From where are you going?</p>
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required  v-model="arrival_city" placeholder=" "/>
+                <input type="text" required @keyup="handleArrivalAutocomplete" v-model="arrival_city" placeholder=" "/>
                 <label>To</label>
               </div>
               <p>Where are you going?</p>
@@ -37,7 +37,7 @@
             </div>
           </form>
          
-          <router-link to="/search-result"><button class="btn" ><i class="ri-search-line"></i></button></router-link>
+          <router-link to="/search-result"><button class="btn" @click="sendSearchRequest"><i class="ri-search-line"></i></button></router-link>
           <!--Add @click Function later-->
         </div>
 
@@ -53,20 +53,88 @@
         departure_city: " ",
         arrival_city: " ",
         traveller: " ",
-        departure_date: " "
+        departure_date: " ",
+        searchresultsDeparture: [],
+        searchresultsArrival: [],
+        arrival_city_result: " ",
+        departure_city_result: " "
       }
     },
-    methods:{
-      handleAutocomplete(event){
-        fetch("http://localhost:8080/flightRestAPI/tickets")
+    methods: {
+    // API-Anfrage testen
+    async handleDepartureAutocomplete() {
+      console.log("Starte API-Anfrage...");
+      const query = this.departure_city.trim();
+      if (!query) {
+        console.log("Eingabe leer, Anfrage abgebrochen.");
+        return;
       }
+
+      try {
+        const response = await fetch(
+          `http://localhost:8081/api/AirportRestAPI/municipality/${query}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        this.searchresultsDeparture = data
+      
+        console.log("API-Antwort erfolgreich:", this.searchresultsDeparture );
+        
+      } catch (error) {
+        console.error("Fehler bei der API-Anfrage:", error);
+      }
+    },
+     // API-Anfrage testen
+     async handleArrivalAutocomplete() {
+      console.log("Starte API-Anfrage...");
+      const query = this.arrival_city.trim();
+      if (!query) {
+        console.log("Eingabe leer, Anfrage abgebrochen.");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `http://localhost:8081/api/AirportRestAPI/municipality/${query}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        this.searchresultsArrival = data
+      
+        console.log("API-Antwort erfolgreich:", this.searchresultsArrival );
+        
+      } catch (error) {
+        console.error("Fehler bei der API-Anfrage:", error);
+      }
+    },
+    sendSearchRequest(){
+      this.arrival_city_result = this.searchresultsArrival[0]
+      this.departure_city_result = this.searchresultsDeparture[0]
+
+      console.log(this.arrival_city_result,this.departure_city_result)
     }
   }
-
-    
-  
-
-
+}
 </script>
 
 
