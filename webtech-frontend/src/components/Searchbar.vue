@@ -9,35 +9,35 @@
           <form>
             <div class="form__group">
               <div class="input__group">
-                <input type="text"  required  placeholder=" "/>
+                <input type="text" @keyup="handleAutocomplete" required  v-model="departure_city" placeholder=" "/>
                 <label>From</label>
               </div>
               <p>From where are you going?</p>
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required  placeholder=" "/>
+                <input type="text" required  v-model="arrival_city" placeholder=" "/>
                 <label>To</label>
               </div>
               <p>Where are you going?</p>
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="date" required placeholder=" " />
+                <input type="date" required v-model="departure_date" placeholder=" " />
                 <label>Duration</label>
               </div>
               <p>Add date</p>
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required  placeholder=" "/>
-                <label>Guests</label>
+                <input type="text" required  v-model="traveller" placeholder=" "/>
+                <label>Travellers</label>
               </div>
-              <p>Add guests</p>
+              <p>Add Traveller</p>
             </div>
           </form>
          
-          <router-link to="/search-result"><button class="btn"><i class="ri-search-line"></i></button></router-link>
+          <router-link to="/search-result"><button class="btn" ><i class="ri-search-line"></i></button></router-link>
           <!--Add @click Function later-->
         </div>
 
@@ -47,7 +47,21 @@
 <script>
   
   
-
+  export default{
+    data(){
+      return{
+        departure_city: " ",
+        arrival_city: " ",
+        traveller: " ",
+        departure_date: " "
+      }
+    },
+    methods:{
+      handleAutocomplete(event){
+        fetch("http://localhost:8080/flightRestAPI/tickets")
+      }
+    }
+  }
 
     
   
@@ -146,7 +160,7 @@
 .booking__container input:not(:placeholder-shown) ~ label {
   font-size: 0.8rem;
   top: 0;
-  color: var(--primary-color); /* Optional: Farbe ändern */
+  color: var(--primary-color); 
 }
 
 </style>
