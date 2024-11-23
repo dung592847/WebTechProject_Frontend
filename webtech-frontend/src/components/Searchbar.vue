@@ -15,7 +15,7 @@
                     <ul>
       <!-- Nur die ersten 5 Ergebnisse anzeigen -->
                       <li v-for="(result, index) in searchresultsDeparture.slice(0, 5)" :key="index" @click="handleDepartureClick(result)">
-                        {{ result.name }} ({{ result.municipality }})
+                        {{ result.municipality }} ({{ result.country }})
                       </li>
                     </ul>
                   </div>
@@ -32,7 +32,7 @@
                     <ul>
       <!-- Nur die ersten 5 Ergebnisse anzeigen -->
                       <li v-for="(result, index) in searchresultsArrival.slice(0, 5)" :key="index" @click="handleArrivalClick(result)">
-                        {{ result.name }} ({{ result.municipality }})
+                        {{ result.municipality }} ({{ result.country }})
                       </li>
                     </ul>
                   </div>
@@ -70,15 +70,15 @@
   export default{
     data(){
       return{
-        departure_city: " ",
-        arrival_city: " ",
-        traveller: " ",
-        departure_date: " ",
+        departure_city: "",
+        arrival_city: "",
+        traveller: "",
+        departure_date: "",
         searchresultsDeparture: [],
         searchresultsArrival: [],
         arrival_city_result: null,
         departure_city_result: null,
-        api_url: `http://localhost:8081/api/AirportRestAPI/municipality/${query}` // https://jsonplaceholder.typicode.com/comments
+        api_url: "http://localhost:8081/api/AirportRestAPI/municipality/" // https://jsonplaceholder.typicode.com/comments
       }
     },
     methods: {
@@ -92,7 +92,7 @@
       }
 
       try {
-        const response = await fetch(this.api_url
+        const response = await fetch(this.api_url+this.departure_city
           ,
           {
             method: "GET",
@@ -126,7 +126,7 @@
 
       try {
         const response = await fetch(
-          this.api_url, 
+          this.api_url+this.arrival_city, 
           {
             method: "GET",
             headers: {
@@ -153,13 +153,13 @@
       console.log("Hallo")
     },
     handleArrivalClick(result){
-      this.arrival_city = result.toString
-      this.arrival_city_result = result.toString
+      this.arrival_city = result.municipality + " (" +result.country+")"
+      this.arrival_city_result = result
       this.searchresultsArrival.length = 0
     },
     handleDepartureClick(result){
-      this.departure_city = result.toString
-      this.departure_city_result = result.toString
+      this.departure_city = result.municipality + " (" +result.country+")"
+      this.departure_city_result = result
       this.searchresultsDeparture.length = 0
     },
     closeAutocomplete(){
