@@ -5,14 +5,19 @@
       rel="stylesheet"
     />
   </head>
-    <div class="booking__container">
+    <div class="booking__container" @click="closeAutocomplete">
           <form>
             <div class="form__group">
               <div class="input__group">
                 <input type="text" @keyup="handleDepartureAutocomplete" required  v-model="departure_city" placeholder=" "/>
-                <div class="autocomplete">
-                  <div class="autocomplete-" v-for="i in departure_city_result.length" :key="i">
-                    <p>{{ departure_city_result[i] }}</p>
+                <div class="autocomplete-wrapper" v-if="searchresultsDeparture.length>0">
+                  <div class="autocomplete-box">
+                    <ul>
+      <!-- Nur die ersten 5 Ergebnisse anzeigen -->
+                      <li v-for="(result, index) in searchresultsDeparture.slice(0, 5)" :key="index" @click="handleDepartureClick(result)">
+                        {{ result.name }} ({{ result.municipality }})
+                      </li>
+                    </ul>
                   </div>
                 </div>
                 <label>From</label>
@@ -21,7 +26,17 @@
             </div>
             <div class="form__group">
               <div class="input__group">
-                <input type="text" required @keyup="handleArrivalAutocomplete" v-model="arrival_city" placeholder=" "/>
+                <input type="text" required @keyup="handleArrivalAutocomplete" v-model="arrival_city" placeholder=" " />
+                <div class="autocomplete-wrapper" v-if="searchresultsArrival.length>0">
+                  <div class="autocomplete-box">
+                    <ul>
+      <!-- Nur die ersten 5 Ergebnisse anzeigen -->
+                      <li v-for="(result, index) in searchresultsArrival.slice(0, 5)" :key="index" @click="handleArrivalClick(result)">
+                        {{ result.name }} ({{ result.municipality }})
+                      </li>
+                    </ul>
+                  </div>
+                </div>
                 <label>To</label>
               </div>
               <p>Where are you going?</p>
@@ -61,8 +76,9 @@
         departure_date: " ",
         searchresultsDeparture: [],
         searchresultsArrival: [],
-        arrival_city_result: " ",
-        departure_city_result: " "
+        arrival_city_result: null,
+        departure_city_result: null,
+        api_url: `http://localhost:8081/api/AirportRestAPI/municipality/${query}` // https://jsonplaceholder.typicode.com/comments
       }
     },
     methods: {
@@ -76,8 +92,8 @@
       }
 
       try {
-        const response = await fetch(
-          `http://localhost:8081/api/AirportRestAPI/municipality/${query}`,
+        const response = await fetch(this.api_url
+          ,
           {
             method: "GET",
             headers: {
@@ -110,7 +126,7 @@
 
       try {
         const response = await fetch(
-          `http://localhost:8081/api/AirportRestAPI/municipality/${query}`,
+          this.api_url, 
           {
             method: "GET",
             headers: {
@@ -133,11 +149,24 @@
       }
     },
     sendSearchRequest(){
-      this.arrival_city_result = this.searchresultsArrival[0]
-      this.departure_city_result = this.searchresultsDeparture[0]
-
-      console.log(this.arrival_city_result,this.departure_city_result)
+    
+      console.log("Hallo")
+    },
+    handleArrivalClick(result){
+      this.arrival_city = result.toString
+      this.arrival_city_result = result.toString
+      this.searchresultsArrival.length = 0
+    },
+    handleDepartureClick(result){
+      this.departure_city = result.toString
+      this.departure_city_result = result.toString
+      this.searchresultsDeparture.length = 0
+    },
+    closeAutocomplete(){
+      this.searchresultsDeparture.length = 0
+      this.searchresultsArrival.length = 0
     }
+    
   }
 }
 </script>
@@ -236,4 +265,33 @@
   color: var(--primary-color); 
 }
 
+.autocomplete-wrapper {
+  position: absolute; /* Unabhängig vom Fluss positionieren */
+  top: 100%; /* Direkt unter dem Input */
+  left: 0; /* Gleiche horizontale Ausrichtung wie der Input */
+  width: 100%; /* Gleiche Breite wie das Input-Feld */
+  background-color: white; /* Hintergrundfarbe für besseren Kontrast */
+  border: 1px solid #ccc; /* Optional: Umrandung für bessere Sichtbarkeit */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Schatten für einen schwebenden Effekt */
+  z-index: 100; /* Über anderen Elementen anzeigen */
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.autocomplete-box ul {
+  list-style: none; /* Bullet-Points entfernen */
+  margin: 0; /* Abstand entfernen */
+  padding: 0; /* Abstand entfernen */
+  max-height: 300px; /* Maximalhöhe setzen */
+  overflow-y: auto; /* Scrollbar, falls die Ergebnisse die Maximalhöhe überschreiten */
+}
+
+.autocomplete-box li {
+  padding: 10px; /* Abstand um den Text */
+  cursor: pointer; /* Mauszeiger ändern */
+}
+
+.autocomplete-box li:hover {
+  background-color: #f0f0f0; /* Hover-Effekt */
+}
 </style>

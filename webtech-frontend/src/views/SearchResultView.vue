@@ -1,9 +1,10 @@
 <template>
+  <div class="body-wrapper">
   <NavHeader></NavHeader>
   <div class="page-container">
     <div class="search-content">
       <div class="searchbar-wrapper">
-        <Searchbar></Searchbar>
+        <Searchbar ></Searchbar>
       </div>
       
       <div class="content-container">
@@ -31,12 +32,14 @@
 
         <!-- Right column for search results -->
         <div class="results-column">
-          <SearchResultBox v-for="i in 4" :key="i"></SearchResultBox>
+          <SearchResultBox  v-for="i in 4" :key="i"></SearchResultBox>
         </div>
       </div>
     </div>
   </div>
   <FooterComponent></FooterComponent>
+
+</div>
 </template>
 
 <script>
@@ -46,13 +49,20 @@ import Searchbar from "../components/Searchbar.vue"
 import SearchResultBox from "../components/SearchResultBox.vue"
 
 export default {
-  name: 'HomeView',
+  name: 'SearchResultView',
   components: {
     NavHeader,
     FooterComponent,
     Searchbar,
     SearchResultBox
-  }
+  },
+  methods:{
+   
+    close(){
+      this.$refs.Searchbar.closeAutocomplete
+    }
+  
+}
 }
 </script>
 

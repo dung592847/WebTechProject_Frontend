@@ -1,4 +1,5 @@
-<template>
+<template >
+  <div class="body-wrapper">
   <NavHeader></NavHeader>
 
   <header class="section__container header__container">
@@ -23,7 +24,7 @@
       
     </header>
     <FooterComponent/> 
-
+  </div>
 </template>
 
 <script>
@@ -41,6 +42,9 @@ export default {
     Searchbar,
     PopularBox,
     FooterComponent
+  },
+  methods:{
+  
   }
 }
 </script>
