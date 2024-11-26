@@ -65,7 +65,7 @@
 
 
 <script>
-  
+  import axios from "axios"
   
   export default{
     data(){
@@ -78,7 +78,10 @@
         searchresultsArrival: [],
         arrival_city_result: null,
         departure_city_result: null,
-        api_url: "http://localhost:8081/api/AirportRestAPI/municipality/" // https://jsonplaceholder.typicode.com/comments
+        api_url: "http://localhost:8081/api/AirportRestAPI/municipality/", // https://jsonplaceholder.typicode.com/comments
+        flightData: null,
+      loading: false,
+      error: null
       }
     },
     methods: {
@@ -148,9 +151,51 @@
         console.error("Fehler bei der API-Anfrage:", error);
       }
     },
-    sendSearchRequest(){
-    
-      console.log("Hallo")
+    async sendSearchRequest() {
+      // Überprüfen ob Städte ausgewählt wurden
+      if (!this.departure_city_result || !this.arrival_city_result) {
+        console.error("Bitte wählen Sie Abflug- und Zielflughafen aus");
+        return;
+      }
+
+      this.loading = true;
+      this.error = null;
+      this.flightData = null;
+
+      try {
+        console.log("Departure City Result:", this.departure_city_result);
+        console.log("Arrival City Result:", this.arrival_city_result);
+
+        // IATA-Codes aus den Ergebnisobjekten extrahieren
+        const depIata = this.departure_city_result.iata_code;
+        const arrIata = this.arrival_city_result.iata_code;
+        
+        console.log("Sending request with IATA codes:", depIata, arrIata);
+
+        const response = await axios.get(
+          "https://api.aviationstack.com/v1/flights",
+          {
+            params: {
+              access_key: "",
+              dep_iata: depIata, 
+              arr_iata: arrIata
+            },
+          }
+        );
+
+        if (response.data.error) {
+          throw new Error(response.data.error.message);
+        }
+
+        this.flightData = response.data;
+        console.log("Received flight data:", this.flightData);
+
+      } catch (err) {
+        console.error("API Error:", err);
+        this.error = "Fehler beim Abrufen der Flugdaten: " + err.message;
+      } finally {
+        this.loading = false;
+      }
     },
     handleArrivalClick(result){
       this.arrival_city = result.municipality + " (" +result.country+")"
