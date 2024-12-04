@@ -9,8 +9,9 @@
 
    
     <SeatAndContactForm></SeatAndContactForm>
-
+    
   </div>
+  <Pricebox></Pricebox>
 
 <FooterComponent></FooterComponent>
 </template>
@@ -21,6 +22,7 @@
   import FooterComponent from "../components/FooterComponent.vue"
   import SeatAndContactForm from "@/components/SeatAndContactForm.vue";
   import SearchResultBox from "../components/SearchResultBox.vue"
+  import Pricebox from "@/components/Pricebox.vue";
 
 
 export default {
@@ -29,6 +31,7 @@ export default {
   components: {
     NavHeader,
     SeatAndContactForm,
+    Pricebox,
     FooterComponent,
     SearchResultBox
   }
