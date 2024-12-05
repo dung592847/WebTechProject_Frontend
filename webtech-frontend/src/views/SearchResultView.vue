@@ -4,7 +4,7 @@
   <div class="page-container">
     <div class="search-content">
       <div class="searchbar-wrapper">
-        <Searchbar ></Searchbar>
+        <Searchbar @searchEmit="takeEmit"></Searchbar>
       </div>
       
       <div class="content-container">
@@ -60,9 +60,32 @@ export default {
    
     close(){
       this.$refs.Searchbar.closeAutocomplete
+    },
+    takeEmit(){
+    this.departure_city = data.departureCity;
+    this.arrival_city = data.arrivalCity;
+    this.departure_date = data.departureDate;
+    this.traveller = data.traveller;
+    console.log("DATA RECEIVED")
     }
   
-}
+},
+data(){
+      return{
+        departure_city: "",
+        arrival_city: "",
+        traveller: "",
+        departure_date: "",
+       
+      
+      }
+},
+props: ['departureCity', 'arrivalCity', 'departureDate', 'traveller',"flightData"],
+  mounted() {
+    console.log("Received Props:");
+    console.log(this.departureCity, this.arrivalCity, this.departureDate, this.traveller);
+  }
+
 }
 </script>
 

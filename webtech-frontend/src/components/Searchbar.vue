@@ -57,7 +57,15 @@
             </div>
           </form>
          
-          <router-link to="/search-result"><button class="btn" @click="sendSearchRequest"><i class="ri-search-line"></i></button></router-link>
+          <router-link :to="{
+    path: '/search-result',
+    query: {
+      departureCity: departure_city,
+      arrivalCity: arrival_city,
+      departureDate: departure_date,
+      traveller: traveller,
+    },
+  }"><button class="btn" @click="sendSearchRequest"><i class="ri-search-line"></i></button></router-link>
           <!--Add @click Function later-->
         </div>
 
@@ -78,7 +86,7 @@
         searchresultsArrival: [],
         arrival_city_result: null,
         departure_city_result: null,
-        api_url: "http://localhost:8081/api/AirportRestAPI/municipality/", // https://jsonplaceholder.typicode.com/comments
+        api_url: "https://webtech-autocomplete.onrender.com/api/AirportRestAPI/municipality/", // https://jsonplaceholder.typicode.com/comments
         flightData: null,
       loading: false,
       error: null
@@ -119,7 +127,7 @@
       }
     },
      // API-Anfrage testen
-     async handleArrivalAutocomplete() {
+    async handleArrivalAutocomplete() {
       console.log("Starte API-Anfrage...");
       const query = this.arrival_city.trim();
       if (!query) {
@@ -176,7 +184,7 @@
           "https://api.aviationstack.com/v1/flights",
           {
             params: {
-              access_key: "",
+              access_key: "b4a0acc6168e874cc4b1e80e105d4f82",
               dep_iata: depIata, 
               arr_iata: arrIata
             },
@@ -189,12 +197,19 @@
 
         this.flightData = response.data;
         console.log("Received flight data:", this.flightData);
-
+        this.$emit("searchEmit", {
+        departureCity: this.departure_city,
+        arrivalCity: this.arrival_city,
+        departureDate: this.departure_date,
+        traveller: this.traveller,
+        apiAnswer : this.flightData
+});
       } catch (err) {
         console.error("API Error:", err);
         this.error = "Fehler beim Abrufen der Flugdaten: " + err.message;
       } finally {
         this.loading = false;
+       
       }
     },
     handleArrivalClick(result){
