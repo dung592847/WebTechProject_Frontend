@@ -76,7 +76,7 @@ data(){
         arrival_city: "",
         traveller: "",
         departure_date: "",
-       
+        flightData: localStorage.getItem(this.flightData)
       
       }
 },

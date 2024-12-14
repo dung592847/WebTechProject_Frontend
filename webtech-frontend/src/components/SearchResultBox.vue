@@ -4,20 +4,20 @@
 
        
             <div class="startInfo">
-                <h2>15:12</h2>
-                <h2>BER</h2>
-                <h2>Berlin</h2>
+                <h2>{{ flightObject.departureTime }}</h2>
+                <h2>{{ flightObject.departureCode }}</h2>
+                <h2>{{ flightObject.departureCity }}</h2>
             </div>
             <div class="additionalInfo">
-                <h2>🛫------1:30h------🛬</h2>
-                <h2>200€</h2>
+                <h2>🛫------{{ flightObject.flightDuration }}------🛬</h2>
+                <h2>{{ flightObject.price }}€</h2>
              
               <router-link to="/flight-details"> <h2 class="view-details">View Details</h2></router-link>     
             </div>
             <div class="endInfo">
-                <h2>16:30</h2>
-                <h2>Heathrow </h2>
-                <h2>London</h2>
+            <h2>{{ flightObject.arrivalTime }}</h2>
+            <h2>{{ flightObject.arrivalCode }}</h2>
+            <h2>{{ flightObject.arrivalCity }}</h2>
             </div>
 
         </div>
@@ -27,7 +27,17 @@
 </template>
 
 
+<script>
 
+export default{
+    data(){
+      return{
+       
+      }
+    },
+    props: ["flightObject"]
+}
+</script>
 
 <style scoped>
 
