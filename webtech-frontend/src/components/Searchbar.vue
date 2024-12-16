@@ -86,7 +86,7 @@
         searchresultsArrival: [],
         arrival_city_result: null,
         departure_city_result: null,
-        api_url: "https://webtech-autocomplete.onrender.com/api/AirportRestAPI/municipality/", // https://jsonplaceholder.typicode.com/comments
+        api_url: "http://localhost:8080/api/AirportRestAPI/municipality/", // https://webtech-autocomplete.onrender.com/api/AirportRestAPI/municipality/
         flightData: null,
       loading: false,
       error: null
@@ -175,8 +175,8 @@
         console.log("Arrival City Result:", this.arrival_city_result);
 
         // IATA-Codes aus den Ergebnisobjekten extrahieren
-        const depIata = this.departure_city_result.iata_code;
-        const arrIata = this.arrival_city_result.iata_code;
+        const depIata =  this.departure_city_result.iataCode;
+        const arrIata = this.arrival_city_result.iataCode;
         
         console.log("Sending request with IATA codes:", depIata, arrIata);
 
@@ -190,7 +190,7 @@
             },
           }
         );
-
+ 
         if (response.data.error) {
           throw new Error(response.data.error.message);
         }
@@ -204,6 +204,9 @@
         traveller: this.traveller,
         apiAnswer : this.flightData
 });
+console.log("Flight Data before localStorage:", this.flightData.data);
+localStorage.setItem('flightData', JSON.stringify(this.flightData.data));
+console.log("Logging Data")
       } catch (err) {
         console.error("API Error:", err);
         this.error = "Fehler beim Abrufen der Flugdaten: " + err.message;
@@ -215,12 +218,12 @@
     handleArrivalClick(result){
       this.arrival_city = result.municipality + " (" +result.country+")"
       this.arrival_city_result = result
-      this.searchresultsArrival.length = 0
+
     },
     handleDepartureClick(result){
       this.departure_city = result.municipality + " (" +result.country+")"
       this.departure_city_result = result
-      this.searchresultsDeparture.length = 0
+     
     },
     closeAutocomplete(){
       this.searchresultsDeparture.length = 0

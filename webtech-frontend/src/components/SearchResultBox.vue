@@ -1,30 +1,24 @@
 <template>
     <div class="searchresult-wrapper">
-
-
-       
-            <div class="startInfo">
-                <h2>{{ flightObject.departureTime }}</h2>
-                <h2>{{ flightObject.departureCode }}</h2>
-                <h2>{{ flightObject.departureCity }}</h2>
-            </div>
-            <div class="additionalInfo">
-                <h2>🛫------{{ flightObject.flightDuration }}------🛬</h2>
-                <h2>{{ flightObject.price }}€</h2>
-             
-              <router-link to="/flight-details"> <h2 class="view-details">View Details</h2></router-link>     
-            </div>
-            <div class="endInfo">
-            <h2>{{ flightObject.arrivalTime }}</h2>
-            <h2>{{ flightObject.arrivalCode }}</h2>
-            <h2>{{ flightObject.arrivalCity }}</h2>
-            </div>
-
-        </div>
-
-
-
-</template>
+      <div class="startInfo">
+        <h2>{{ flightObject.departure.scheduled }}</h2>
+        <h2>{{ flightObject.departure.iata }}</h2>
+        <h2>{{ flightObject.departure.airport }}</h2>
+      </div>
+      <div class="additionalInfo">
+        <h2>🛫------ Flugdauer ------🛬</h2>
+        <h2>Preis nicht in API</h2>
+        <router-link to="/flight-details"> 
+          <h2 class="view-details">View Details</h2>
+        </router-link>     
+      </div>
+      <div class="endInfo">
+        <h2>{{ flightObject.arrival.scheduled }}</h2>
+        <h2>{{ flightObject.arrival.iata }}</h2>
+        <h2>{{ flightObject.arrival.airport }}</h2>
+      </div>
+    </div>
+  </template>
 
 
 <script>

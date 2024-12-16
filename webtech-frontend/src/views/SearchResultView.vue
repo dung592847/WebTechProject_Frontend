@@ -32,7 +32,13 @@
 
         <!-- Right column for search results -->
         <div class="results-column">
-          <SearchResultBox  v-for="i in 4" :key="i"></SearchResultBox>
+          <div class="results-column">
+            <SearchResultBox 
+      v-for="(flight, index) in flightData" 
+      :key="index"  
+      :flightObject="flight" 
+    />
+          </div>
         </div>
       </div>
     </div>
@@ -76,14 +82,21 @@ data(){
         arrival_city: "",
         traveller: "",
         departure_date: "",
-        flightData: localStorage.getItem(this.flightData)
+        flightData: JSON.parse(localStorage.getItem('flightData')) || []
       
       }
 },
 props: ['departureCity', 'arrivalCity', 'departureDate', 'traveller',"flightData"],
   mounted() {
-    console.log("Received Props:");
-    console.log(this.departureCity, this.arrivalCity, this.departureDate, this.traveller);
+    const storedFlightData = JSON.parse(localStorage.getItem('flightData'));
+  console.log("Stored Flight Data:", storedFlightData);
+  console.log("Number of Flights:", storedFlightData ? storedFlightData.length : 0);
+  
+  if (storedFlightData && storedFlightData.length > 0) {
+    console.log("First Flight Details:", storedFlightData[0]);
+  }
+  
+  this.flightData = storedFlightData || [];
   }
 
 }
