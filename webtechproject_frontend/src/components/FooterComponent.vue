@@ -15,7 +15,7 @@
         </div>
         <div class="footer__col">
           <h4>Company</h4>
-          <p>About Us</p>
+          <RouterLink to= "/about"><p>About us</p></RouterLink>
           <p>Our Team</p>
           <p>Blog</p>
           <p>Book</p>

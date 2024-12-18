@@ -10,7 +10,7 @@
     <SeatAndContactForm></SeatAndContactForm>
     
   </div>
-  <Pricebox></Pricebox>
+  <ContinueButton></ContinueButton>
 
 <FooterComponent></FooterComponent>
 </template>
@@ -21,7 +21,7 @@
   import FooterComponent from "../components/FooterComponent.vue"
   import SeatAndContactForm from "@/components/SeatAndContactForm.vue";
   import SearchResultBox from "../components/SearchResultBox.vue"
-  import Pricebox from "@/components/Pricebox.vue";
+import ContinueButton from "@/components/ContinueButton.vue";
 
 
 export default {
@@ -30,7 +30,7 @@ export default {
   components: {
     NavHeader,
     SeatAndContactForm,
-    Pricebox,
+    ContinueButton,
     FooterComponent,
     SearchResultBox
   }

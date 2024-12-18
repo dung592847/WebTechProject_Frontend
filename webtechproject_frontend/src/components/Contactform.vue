@@ -21,8 +21,8 @@
               <input type="text" placeholder="confirm E-Mail" required />
             </div>
             <div class="input-box">
-              <span class="details">Country Code</span>
-              <input type="text" placeholder="country code" required />
+              <span class="details">password</span>
+              <input type="text" placeholder="password" required />
             </div>
             <div class="input-box">
               <span class="details">Phone Number</span>
@@ -48,20 +48,17 @@
           <div class="data-details">
             <input type="radio" name="data" id="dot-1" />
             <input type="radio" name="data" id="dot-2" />
-            <span class="save-Data">DATA</span>
+            <span class="save-Data">gender</span>
             <div class="category">
               <label for="dot-1">
                 <span class="dot one"></span>
-                <span class="data">save</span>
+                <span class="data">male</span>
               </label>
               <label for="dot-2">
                 <span class="dot two"></span>
-                <span class="data">do not save</span>
+                <span class="data">female</span>
               </label>
             </div>
-          </div>
-          <div class="button">
-            <input type="submit" value="complete" />
           </div>
         </form>
       </div>
