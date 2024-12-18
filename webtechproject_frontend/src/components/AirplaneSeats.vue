@@ -85,8 +85,17 @@ export default {
             if (this.isOccupied(seatId)) return; // Keine Aktion bei besetzten Sitzen
             if (this.selectedSeats.includes(seatId)) {
                 this.selectedSeats = this.selectedSeats.filter(id => id !== seatId);
+                this.$store.commit("removeFromSeatsList", {seatId});
             } else {
-                this.selectedSeats.push(seatId);
+                  // Prüfe, ob die maximale Anzahl erreicht ist
+                if (this.selectedSeats.length >= this.$store.state.userInputObject.traveller) {
+                    alert(`Sie können maximal ${this.$store.state.userInputObject.traveller} Sitzplätze auswählen.`);
+                    return;
+                }
+            // Füge den Sitzplatz hinzu
+            this.$store.commit("addToSeatsList",{seatId})
+            console.log(this.$store.state.seatsList)
+            this.selectedSeats.push(seatId);
             }
         },
         isSelected(seatId) {
