@@ -148,6 +148,10 @@ export default {
 
     handleSearch() {
    this.$store.dispatch('fetchAviationData');
+   this.$store.commit('setUserInput', {
+        key: "traveller",
+        value: this.traveller
+      });
    setTimeout(() => {
       this.$router.push('/search-result');
    }, 2000);  

@@ -2,6 +2,10 @@
   <NavHeader></NavHeader>
 <div class="searchresult-wrapper">
 
+
+<p>{{ $store.state.currentFlightDetailed }}</p>
+
+
 </div>
 
   <div class="component-wrapper">

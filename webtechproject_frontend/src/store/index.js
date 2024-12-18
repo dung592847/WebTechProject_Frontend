@@ -38,7 +38,34 @@ export default createStore({
       autocompleteUrl: "http://localhost:8080/api/AirportRestAPI/municipality/"
     },
 
-    currentFlightDetailed:{}
+    currentFlightDetailed:{},
+
+    ticketDbObject:{
+        name: "",
+        departure:"",
+        destination:"",
+        gate:"",
+        date:null,
+        seat: "",
+        boardingTime:null
+    },
+
+    registrationObject:{
+      firstName:"",
+      lastName:"",
+      email:"",
+      password:"",
+      city:"",
+      country:"",
+      phoneNumber:"",
+      adress:"",
+      postalCode:"",
+      gender :""
+    },
+
+    ticketsList:[],
+    seatsList:[]
+    
 
   },
   getters: {
@@ -58,7 +85,38 @@ export default createStore({
       } else {
         console.warn(`Key "${key}" exists nicht im userInputObject.`);
       }
+    },  removeFromSeatsList(state, { seatId }) {
+      state.seatsList = state.seatsList.filter(seat => seat.seatId !== seatId);
+      console.log("Die seatslists in store : " +state.seatsList)
     },
+    addToSeatsList(state, seatId) {
+      if (!state.seatsList.includes(seatId)) {
+          state.seatsList.push(seatId);
+      }
+  },
+    setTicketDbObject(state, { key, value }) { 
+      if (state.ticketDbObject.hasOwnProperty(key)) {
+        state.ticketDbObject[key] = value;
+      } else {
+        console.warn(`Key "${key}" exists nicht im ticketDbObject.`);
+      }
+
+    },setRegistrationObject(state, { key, value }) { 
+      if (state.registrationObject.hasOwnProperty(key)) {
+        state.registrationObject[key] = value;
+      } else {
+        console.warn(`Key "${key}" exists nicht im registrationObject.`);
+      }
+    },
+
+    addTicketToList(state, ticket) {
+      if (ticket && typeof ticket === "object") {
+        state.ticketsList.push(ticket);
+      } else {
+        console.warn("Das hinzugefügte Ticket muss ein gültiges Objekt sein.");
+      }
+    },
+
    
 
     /**
@@ -90,6 +148,21 @@ export default createStore({
     },
     setCurrentFlightDetailed(state, flightDetails) {
       state.currentFlightDetailed = flightDetails;
+  },
+  assignSeatsToTickets(state, seatList) {
+    if (!Array.isArray(state.ticketsList) || !Array.isArray(seatList)) {
+      console.warn("Sowohl `ticketsList` als auch `seatList` müssen Arrays sein.");
+      return;
+    }
+
+    for (let i = 0; i < state.ticketsList.length; i++) {
+      if (i < seatList.length) {
+        state.ticketsList[i].seat = seatList[i];
+      } else {
+        console.warn(`Nicht genügend Sitzplätze in der Liste für Ticket ${i + 1}.`);
+        break; // Keine weiteren Sitzplätze verfügbar
+      }
+    }
   }
   
   },
