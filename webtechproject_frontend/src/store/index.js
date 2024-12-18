@@ -3,6 +3,7 @@ import axios from 'axios'; // Axios importieren
 
 export default createStore({
   state: {
+    user: null,
     /**
      * In diesem Objekt, werden die User Eingaben gespeichert,
      * alles wird vom User eingegeben, außer die IATA Codes, diese
@@ -88,7 +89,7 @@ export default createStore({
     },  removeFromSeatsList(state, { seatId }) {
       state.seatsList = state.seatsList.filter(seat => seat.seatId !== seatId);
       console.log("Die seatslists in store : " +state.seatsList)
-    },
+    }, 
     addToSeatsList(state, seatId) {
       if (!state.seatsList.includes(seatId)) {
           state.seatsList.push(seatId);
@@ -116,6 +117,7 @@ export default createStore({
         console.warn("Das hinzugefügte Ticket muss ein gültiges Objekt sein.");
       }
     },
+
 
    
 
@@ -164,7 +166,7 @@ export default createStore({
       }
     }
   }
-  
+
   },
   actions: {
 
