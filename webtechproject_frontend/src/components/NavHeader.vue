@@ -5,6 +5,7 @@
         <li class="link"><router-link to="/">Home</router-link></li>
         <li class="link"><router-link to="/about">About Us</router-link></li>
         <li class="link"><router-link to="/contact-us">Contact Us</router-link></li>
+        <li class="link"><router-link to = "/login">Log In</router-link></li>
       </ul>
     </nav>
 </template>

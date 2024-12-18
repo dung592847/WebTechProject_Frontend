@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ContactView from '../views/ContactView.vue'
 import SearchResultView from '../views/SearchResultView.vue'
 import FlightDetailsView from '../views/FlightDetailsView.vue'
+import LoginRegister from '@/components/LoginRegister.vue'
 
 const routes = [
   {
@@ -34,6 +35,11 @@ const routes = [
     path: '/flight-details',
     name: 'flight-details',
     component: FlightDetailsView
+  },
+  {
+    path: "/login",
+    name:"log-in",
+    component: LoginRegister 
   }
 ]
 
