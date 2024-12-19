@@ -1,7 +1,7 @@
 <template>
     <div class="account-container">
       <h1>Mein Konto bearbeiten</h1>
-      <form @submit.prevent="updateUser">
+      <form @submit.prevent="updateAccount">
         <div class="form-group">
           <label for="firstName">Vorname:</label>
           <input v-model="user.firstName" id="firstName" type="text" />
@@ -9,7 +9,7 @@
   
         <div class="form-group">
           <label for="lastName">Nachname:</label>
-          <input v-model="user.lastName" id="lastName" type="text" />
+          <input v-model="user.lastName" id="lastName" type="text" >
         </div>
   
         <div class="form-group">
@@ -50,13 +50,13 @@
         <div class="form-group">
           <label for="gender">Geschlecht:</label>
           <select v-model="user.gender" id="gender">
-            <option value="male">Männlich</option>
-            <option value="female">Weiblich</option>
-            <option value="other">Andere</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+            <option value="other">other</option>
           </select>
         </div>
   
-        <RouterLink to="/"><button type="submit">Speichern</button></RouterLink>
+        <button type="submit">Save</button>
       </form>
     </div>
   </template>
@@ -75,21 +75,28 @@
           phoneNumber: '',
           address: '',
           postalCode: '',
-          gender: 'male' // Standardwert auf "male"
+          gender: '' // Standardwert auf "male"
         }
       };
     },
     methods: {
-      async updateUser() {
-        try {
-          const response = await this.$store.dispatch('updateUser', this.user);
-          console.log('Benutzer aktualisiert:', response);
-          // Zeige Erfolgsmeldung oder führe weitere Aktionen durch
-        } catch (error) {
-          console.error('Fehler beim Aktualisieren:', error);
-        }
+      async updateAccount() {
+      try {
+        this.$store.commit("setUser",this.user)
+        this.$store.dispatch("updateAccount")
+        this.user = { ...this.$store.state.user }
+      } catch (error) {
+        console.error('Fehler beim Senden der Anfrage:', error);
       }
     }
+  
+     
+    },
+    mounted() {
+   
+    this.user = { ...this.$store.state.user }; // Kopiere die Benutzerdaten aus dem Store in das `user`-Objekt
+    console.log(this.user)
+  }
   };
   </script>
   

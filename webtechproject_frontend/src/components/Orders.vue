@@ -4,22 +4,26 @@
       <table v-if="orders.length > 0">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Flugnummer</th>
-            <th>Abflugort</th>
-            <th>Zielort</th>
-            <th>Datum</th>
-            <th>Platz</th>
+
+            <th>FlightNumber</th>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Seat</th>  
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="order in orders" :key="order.id">
-            <td>{{ order.id }}</td>
             <td>{{ order.flightNumber }}</td>
             <td>{{ order.departure }}</td>
             <td>{{ order.destination }}</td>
             <td>{{ order.date }}</td>
             <td>{{ order.seat }}</td>
+            <td id="button-wrapper">
+              <button id="button"> Cancel Ticket</button>
+             
+            </td>
           </tr>
         </tbody>
       </table>
@@ -44,6 +48,21 @@
   </script>
   
   <style scoped>
+
+  #button{
+    background-color: red;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0%
+  }
+
+  #button-wrapper{
+    padding: 0%;
+  }
+
   .orders-container {
     max-width: 800px;
     margin: auto;

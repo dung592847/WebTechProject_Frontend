@@ -6,8 +6,7 @@
       <li class="link"><router-link to="/about">About Us</router-link></li>
       <li class="link"><router-link to="/contact-us">Contact Us</router-link></li>
       <li class="link" v-if="!isLoggedIn"><router-link to="/login">Log In</router-link></li>
-      <li class ="link"> <router-link to="/account">Account</router-link></li>
-      <li class ="link"> <router-link to="/orders">Orders</router-link></li>
+      <li class ="link" v-if="isLoggedIn"> <router-link to="/user-information">Account</router-link></li>
     </ul>
   </nav>
 </template>
@@ -16,10 +15,7 @@
 export default {
   computed: {
     isLoggedIn() {
-      return this.$store.getters.isLoggedIn; // Benutzerstatus aus Vuex-Store abrufen
-    },
-    user() {
-      return this.$store.state.user; // Benutzerobjekt aus dem Store
+      return this.$store.state.isLoggedIn; // Benutzerstatus aus Vuex-Store abrufen
     }
   }
 };

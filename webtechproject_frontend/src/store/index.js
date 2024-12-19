@@ -2,8 +2,11 @@ import { createStore } from 'vuex'
 import axios from 'axios'; // Axios importieren
 
 export default createStore({
-  state: {
-    user: null,
+  state: {    
+    isLoggedIn:false,
+
+    user: {},
+
     /**
      * In diesem Objekt, werden die User Eingaben gespeichert,
      * alles wird vom User eingegeben, außer die IATA Codes, diese
@@ -36,7 +39,9 @@ export default createStore({
      */
     urlObject:{
       aviationStackUrl : "https://jsonplaceholder.typicode.com/posts",
-      autocompleteUrl: "http://localhost:8080/api/AirportRestAPI/municipality/"
+      autocompleteUrl: "http://localhost:8080/api/AirportRestAPI/municipality/",
+      accountUrl: "http://localhost:8080/api/AccountAPI/accounts/"
+
     },
 
     currentFlightDetailed:{},
@@ -65,13 +70,24 @@ export default createStore({
     },
 
     ticketsList:[],
-    seatsList:[]
+    seatsList:[],
     
 
   },
   getters: {
   },
   mutations: {
+    setRegistrationObjectToObject(state, object) { 
+      state.registrationObject = object
+      },
+    setUser(state,userObject){
+    state.user = userObject
+    }
+    ,
+    setIsLoggedIn(state){
+      state.isLoggedIn = !(state.isLoggedIn)
+    },
+
     /**
      * Setzt einen beliebigen Wert im `userInputObject`, sofern der Schlüssel existiert.
      * @param {Object} state - Der aktuelle Vuex-Store-State.
@@ -277,13 +293,81 @@ export default createStore({
       } catch (error) {
         console.error("Fehler bei der API-Anfrage:", error);
       }
+    },
+
+    async loginAccount({ commit, state }, { emailUser, passwordUser }) {
+      try {
+        console.log(emailUser + " " + passwordUser); // Überprüfe, ob die Werte korrekt sind
+        const url = `${state.urlObject.accountUrl}login?email=${emailUser}&password=${passwordUser}`;
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        commit('setUser', data);
+        commit("setIsLoggedIn");
+      } catch (error) {
+        console.error("Fehler bei der API-Anfrage:", error);
+      }
+    },
+
+    async updateAccount({ commit, state }) {
+      try {
+        const url = `${state.urlObject.accountUrl}update`;
+        const response = await fetch(url, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(state.user),  // Die Benutzerdaten als JSON im Request-Body übermitteln
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        commit('setUser', data);  // Die Antwort von der API wird in den Store gespeichert
+      } catch (error) {
+        console.error("Fehler bei der API-Anfrage:", error);
+      }
+    },
+
+    async createAccount({ commit, state }){
+      try {
+        const url = `${state.urlObject.accountUrl}registration`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(state.registrationObject),  // Die Benutzerdaten als JSON im Request-Body übermitteln
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        commit('setUser', data);  // Die Antwort von der API wird in den Store gespeichert
+      } catch (error) {
+        console.error("Fehler bei der API-Anfrage:", error);
+      }
     }
+  }
 
 
     
     
 
-  },
+  ,
   modules: {
   }
 })

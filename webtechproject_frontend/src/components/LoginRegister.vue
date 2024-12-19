@@ -19,7 +19,7 @@
         </div>
   
         <div v-if="activeTab === 'login'" class="tab-content">
-          <h2 class="title">Welcome to the Future</h2>
+          <h2 class="title">Welcome!</h2>
           <p class="subtitle">Sign in to continue</p>
   
           <form @submit.prevent="handleLogin">
@@ -51,7 +51,7 @@
               type="submit"
               class="button"
               :disabled="!loginEmail || !loginPassword"
-              @click="showValidation = true"
+              @click="logInUser"
             >
               Next
             </button>
@@ -60,7 +60,7 @@
   
         <div v-if="activeTab === 'register'" class="tab-content">
           <h2 class="title">Create a New Account</h2>
-          <p class="subtitle">Join the future with us</p>
+          <p class="subtitle">Join us!</p>
   
           <form @submit.prevent="handleRegister">
             <div class="input-group" :class="{ 'input-error': !registerName && showValidation }">
@@ -136,14 +136,25 @@
     methods: {
       handleLogin() {
         // Simulate API call for login
-        alert('Logged in successfully!');
-        this.$router.push('/');
+        
       },
       handleRegister() {
         // Simulate API call for registration
         alert('Registered successfully!');
         this.$router.push('/');
       },
+      logInUser(){
+        console.log(this.loginEmail+ " "+this.loginPassword)
+        this.showValidation = true
+        this.$store.dispatch("loginAccount", {
+          emailUser: this.loginEmail,
+          passwordUser: this.loginPassword
+        });
+
+        if(this.$store.state.user !=null){
+          this.$router.push('/');
+        }
+      }
     },
   };
   </script>

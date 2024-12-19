@@ -24,6 +24,7 @@ export default {
 
     handleReturn () {
       this.showModal = true
+      this.$store.dispatch("createAccount")
       setTimeout(() => {
       this.$router.push('/');
    }, 5000);

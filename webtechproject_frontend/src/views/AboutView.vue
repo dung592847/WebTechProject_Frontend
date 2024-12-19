@@ -95,7 +95,7 @@
 <FooterComponent></FooterComponent>
 </template>
 
-<script>
+<script >
 // @ is an alias to /src
 import NavHeader from "../components/NavHeader.vue"
 import FooterComponent from "../components/FooterComponent.vue"
@@ -114,7 +114,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;

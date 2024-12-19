@@ -1,73 +1,99 @@
 <template>
-    
-      <div class="divBody2">
-        <div class="title">Contact</div>
-        <form action="#">
-          <div class="user-details">
-            <div class="input-box">
-              <span class="details">First Name</span>
-              <input type="text" placeholder="first name" required />
-            </div>
-            <div class="input-box">
-              <span class="details">Last Name</span>
-              <input type="text" placeholder="last name" required />
-            </div>
-            <div class="input-box">
-              <span class="details">E-Mail</span>
-              <input type="text" placeholder="E-Mail" required />
-            </div>
-            <div class="input-box">
-              <span class="details">Confirm E-Mail</span>
-              <input type="text" placeholder="confirm E-Mail" required />
-            </div>
-            <div class="input-box">
-              <span class="details">password</span>
-              <input type="text" placeholder="password" required />
-            </div>
-            <div class="input-box">
-              <span class="details">Phone Number</span>
-              <input type="text" placeholder="phone number" required />
-            </div>
-            <div class="input-box">
-              <span class="details">Adress</span>
-              <input type="text" placeholder="adress" required />
-            </div>
-            <div class="input-box">
-              <span class="details">Postal Code</span>
-              <input type="text" placeholder="postal code" required />
-            </div>
-            <div class="input-box">
-              <span class="details">City</span>
-              <input type="text" placeholder="city" required />
-            </div>
-            <div class="input-box">
-              <span class="details">Country</span>
-              <input type="text" placeholder="country" required />
-            </div>
-          </div>
-          <div class="data-details">
-            <input type="radio" name="data" id="dot-1" />
-            <input type="radio" name="data" id="dot-2" />
-            <span class="save-Data">gender</span>
-            <div class="category">
-              <label for="dot-1">
-                <span class="dot one"></span>
-                <span class="data">male</span>
-              </label>
-              <label for="dot-2">
-                <span class="dot two"></span>
-                <span class="data">female</span>
-              </label>
-            </div>
-          </div>
-        </form>
+  <div class="divBody2">
+    <div class="title">Contact</div>
+    <form @submit.prevent="createUser">
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">First Name</span>
+          <input type="text" placeholder="first name" v-model="registrationObject.firstName" required />
+        </div>
+        <div class="input-box">
+          <span class="details">Last Name</span>
+          <input type="text" placeholder="last name" v-model="registrationObject.lastName" required />
+        </div>
+        <div class="input-box">
+          <span class="details">E-Mail</span>
+          <input type="text" placeholder="E-Mail" v-model="registrationObject.email" required />
+        </div>
+        <div class="input-box">
+          <span class="details">Confirm E-Mail</span>
+          <input type="text" placeholder="confirm E-Mail" v-model="registrationObject.confirmEmail" required />
+        </div>
+        <div class="input-box">
+          <span class="details">Password</span>
+          <input type="password" placeholder="password" v-model="registrationObject.password" required />
+        </div>
+        <div class="input-box">
+          <span class="details">Phone Number</span>
+          <input type="text" placeholder="phone number" v-model="registrationObject.phoneNumber" required />
+        </div>
+        <div class="input-box">
+          <span class="details">Address</span>
+          <input type="text" placeholder="address" v-model="registrationObject.address" required />
+        </div>
+        <div class="input-box">
+          <span class="details">Postal Code</span>
+          <input type="text" placeholder="postal code" v-model="registrationObject.postalCode" required />
+        </div>
+        <div class="input-box">
+          <span class="details">City</span>
+          <input type="text" placeholder="city" v-model="registrationObject.city" required />
+        </div>
+        <div class="input-box">
+          <span class="details">Country</span>
+          <input type="text" placeholder="country" v-model="registrationObject.country" required />
+        </div>
       </div>
-   
-  </template>
+      <div class="data-details">
+        <input type="radio" name="gender" id="dot-1" v-model="registrationObject.gender" value="male" />
+        <input type="radio" name="gender" id="dot-2" v-model="registrationObject.gender" value="female" />
+        <span class="save-Data">Gender</span>
+        <div class="category">
+          <label for="dot-1">
+            <span class="dot one"></span>
+            <span class="data">Male</span>
+          </label>
+          <label for="dot-2">
+            <span class="dot two"></span>
+            <span class="data">Female</span>
+          </label>
+        </div>
+      </div>
+      <div class="button">
+        <input type="submit" value="Submit" @click="createUser"/>
+      </div>
+    </form>
+  </div>
+</template>
   
   <script>
   export default {
-    name: 'Contactform'
+    name: 'Contactform',
+    data() {
+    return {
+      registrationObject:{
+      firstName:"",
+      lastName:"",
+      email:"",
+      password:"",
+      city:"",
+      country:"",
+      phoneNumber:"",
+      adress:"",
+      postalCode:"",
+      gender :""
+    }
+    }
+  },
+
+    methods:{
+    
+        createUser(){
+        this.$store.commit("setRegistrationObjectToObject",this.registrationObject)
+        console.log(this.$store.state.registrationObject)
+      }
+      
+    }
   }
   </script>
   
