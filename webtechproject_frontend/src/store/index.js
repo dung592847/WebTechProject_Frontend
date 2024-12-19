@@ -39,8 +39,8 @@ export default createStore({
      */
     urlObject:{
       aviationStackUrl : "https://jsonplaceholder.typicode.com/posts",
-      autocompleteUrl: "https://webtech-autocomplete.onrender.com/",
-      accountUrl: "https://accountservice-v1.onrender.com/"
+      autocompleteUrl: "https://webtech-autocomplete.onrender.com/api/AirportRestAPI/municipality/",
+      accountUrl: "https://accountservice-v1.onrender.com/api/AccountAPI/accounts/"
 
     },
 
@@ -236,7 +236,7 @@ export default createStore({
           "https://api.aviationstack.com/v1/flights",
           {
             params: {
-              access_key: "b4a0acc6168e874cc4b1e80e105d4f82",
+              access_key: "4c46ff1403a80f1ada059e4930c93775",
               dep_iata: state.userInputObject.departureIata, 
               arr_iata: state.userInputObject.arrivalIata
             },
@@ -343,6 +343,7 @@ export default createStore({
     async createAccount({ commit, state }){
       try {
         const url = `${state.urlObject.accountUrl}registration`;
+        console.log(url)
         const response = await fetch(url, {
           method: "POST",
           headers: {
@@ -351,6 +352,7 @@ export default createStore({
           body: JSON.stringify(state.registrationObject),  // Die Benutzerdaten als JSON im Request-Body übermitteln
         });
     
+        console.log("After creation: ",state.registrationObject)
         if (!response.ok) {
           throw new Error(`HTTP-Fehler! Status: ${response.status}`);
         }
