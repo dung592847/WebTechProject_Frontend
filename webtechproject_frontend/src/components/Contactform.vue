@@ -1,5 +1,5 @@
 <template>
-  <div class="divBody2">
+  <div v-if="!isLoggedIn" class="divBody2">
     <div class="title">Contact</div>
     <form @submit.prevent="createUser">
       <div class="user-details">
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="button">
-        <input type="submit" value="Submit" @click="createUser"/>
+        <input type="submit" value="Submit" />
       </div>
     </form>
   </div>
@@ -81,19 +81,68 @@
       phoneNumber:"",
       adress:"",
       postalCode:"",
-      gender :""
-    }
+      gender :"",
+      role: "USER"
+
+    },
+    isLoggedIn: false
     }
   },
-
-    methods:{
+  methods:{
     
-        createUser(){
-        this.$store.commit("setRegistrationObjectToObject",this.registrationObject)
-        console.log(this.$store.state.registrationObject)
-      }
-      
-    }
+    async createUser(){
+    this.$store.commit("setRegistrationObjectToObject",this.registrationObject)
+    await this.$store.dispatch("createAccount");
+
+    await this.$store.dispatch("loginAccount",{emailUser: this.registrationObject.email,passwordUser: this.registrationObject.password});
+
+    
+  },
+  async checkAuthStatus() {
+try {
+const token =   localStorage.getItem('auth_token'); 
+
+
+// Senden der Anfrage mit nur dem Token
+const response = await fetch(this.$store.state.urlObject.userUrl + '/check-auth', {
+  method: 'POST',
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ token }) // Das Token korrekt verpackt in ein JSON-Objekt
+});
+
+// Prüfen, ob die Anfrage erfolgreich war
+if (!response.ok) {
+  throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+}
+
+// Die Antwort parsen
+const isTokenValid = await response.json();
+
+// Token-Validierung überprüfen
+if (isTokenValid.tokenValid === true) {
+  this.isLoggedIn = true;
+} else {
+  this.isLoggedIn = false;
+}
+
+} catch (error) {
+console.error("Fehler bei der Token-Überprüfung:", error);
+this.isLoggedIn = false;
+}
+}
+
+  
+},
+
+   
+
+    mounted() {
+  this.checkAuthStatus(); // Status bei Initialisierung überprüfen
+  console.log(this.isLoggedIn)
+  console.log(this.$store.state.token)
+}
   }
   </script>
   

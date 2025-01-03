@@ -40,7 +40,8 @@ export default createStore({
     urlObject:{
       aviationStackUrl : "https://jsonplaceholder.typicode.com/posts",
       autocompleteUrl: "https://webtech-autocomplete.onrender.com/api/AirportRestAPI/municipality/",
-      accountUrl: "https://accountservice-v1.onrender.com/api/AccountAPI/accounts/"
+      userUrl: "http://localhost:8080/api/v1/auth",
+      ticketsUrl: "http://localhost:8080/api/v1/tickets"
 
     },
 
@@ -71,10 +72,11 @@ export default createStore({
 
     ticketsList:[],
     seatsList:[],
-    
+    token:""
 
   },
   getters: {
+
   },
   mutations: {
     setRegistrationObjectToObject(state, object) { 
@@ -181,7 +183,10 @@ export default createStore({
         break; // Keine weiteren Sitzplätze verfügbar
       }
     }
-  }
+  },
+  setToken(state, token) {
+    state.token = token;}
+
 
   },
   actions: {
@@ -297,13 +302,19 @@ export default createStore({
 
     async loginAccount({ commit, state }, { emailUser, passwordUser }) {
       try {
-        console.log(emailUser + " " + passwordUser); // Überprüfe, ob die Werte korrekt sind
-        const url = `${state.urlObject.accountUrl}login?email=${emailUser}&password=${passwordUser}`;
+        const url = `${state.urlObject.userUrl}/signin`;
+    
+        const requestData = {
+          email: emailUser,
+          password: passwordUser,
+        };
+    
         const response = await fetch(url, {
-          method: "GET",
+          method: "POST",  
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json",  
           },
+          body: JSON.stringify(requestData), 
         });
     
         if (!response.ok) {
@@ -311,8 +322,13 @@ export default createStore({
         }
     
         const data = await response.json();
-        commit('setUser', data);
+        const token = data.token;  
+    
+        commit('setToken', token); 
+        localStorage.setItem('auth_token', token); 
+        localStorage.setItem('email', emailUser); 
         commit("setIsLoggedIn");
+        console.log(token)
       } catch (error) {
         console.error("Fehler bei der API-Anfrage:", error);
       }
@@ -320,13 +336,18 @@ export default createStore({
 
     async updateAccount({ commit, state }) {
       try {
-        const url = `${state.urlObject.accountUrl}update`;
+        const request = {
+          user:state.user,
+          token: localStorage.getItem("auth_token"),
+          role:"USER"
+        }
+        const url = `${state.urlObject.userUrl}/user`;
         const response = await fetch(url, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(state.user),  // Die Benutzerdaten als JSON im Request-Body übermitteln
+          body: JSON.stringify(request),  // Die Benutzerdaten als JSON im Request-Body übermitteln
         });
     
         if (!response.ok) {
@@ -342,23 +363,24 @@ export default createStore({
 
     async createAccount({ commit, state }){
       try {
-        const url = `${state.urlObject.accountUrl}registration`;
+        const url = `${state.urlObject.userUrl}/signup`;
+        const user = state.registrationObject
         console.log(url)
         const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(state.registrationObject),  // Die Benutzerdaten als JSON im Request-Body übermitteln
+          body: JSON.stringify({user}),  // Die Benutzerdaten als JSON im Request-Body übermitteln
         });
     
-        console.log("After creation: ",state.registrationObject)
+
         if (!response.ok) {
           throw new Error(`HTTP-Fehler! Status: ${response.status}`);
         }
     
         const data = await response.json();
-        commit('setUser', data);  // Die Antwort von der API wird in den Store gespeichert
+        commit('setUser', data.user);  // Die Antwort von der API wird in den Store gespeichert
       } catch (error) {
         console.error("Fehler bei der API-Anfrage:", error);
       }

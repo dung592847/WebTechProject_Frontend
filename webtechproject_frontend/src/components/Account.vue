@@ -96,6 +96,7 @@
    
     this.user = { ...this.$store.state.user }; // Kopiere die Benutzerdaten aus dem Store in das `user`-Objekt
     console.log(this.user)
+    
   }
   };
   </script>

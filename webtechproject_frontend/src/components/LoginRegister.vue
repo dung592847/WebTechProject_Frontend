@@ -131,6 +131,7 @@
         registerEmail: '',
         registerPassword: '',
         showValidation: false,
+
       };
     },
     methods: {
@@ -138,22 +139,39 @@
         // Simulate API call for login
         
       },
-      handleRegister() {
-        // Simulate API call for registration
-        alert('Registered successfully!');
+      async handleRegister() {
+        const registrationObject={
+
+         firstName: this.registerName,
+  lastName:this.registerName,
+  email:this.registerEmail,
+  password: this.registerPassword,
+  city: "Berlin",
+  country: "Germany",
+  phoneNumber: "1234567890",
+  address: "Musterstraße 1",
+  postalCode: "10115",
+  gender: "Male",
+  role: "USER"
+        }
+         
+        this.$store.commit("setRegistrationObjectToObject",registrationObject)
+        await this.$store.dispatch("createAccount");
         this.$router.push('/');
+
       },
-      logInUser(){
-        console.log(this.loginEmail+ " "+this.loginPassword)
+      async logInUser(){
         this.showValidation = true
-        this.$store.dispatch("loginAccount", {
+        await this.$store.dispatch("loginAccount", {
           emailUser: this.loginEmail,
           passwordUser: this.loginPassword
         });
 
-        if(this.$store.state.user !=null){
-          this.$router.push('/');
-        }
+
+        this.$store.commit("setIsLoggedIn")
+        console.log("State log status "+this.$store.state.isLoggedIn)
+        this.$router.push('/');
+
       }
     },
   };

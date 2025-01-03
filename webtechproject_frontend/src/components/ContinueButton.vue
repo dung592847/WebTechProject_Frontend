@@ -22,9 +22,56 @@ export default {
   },
   methods:{
 
-    handleReturn () {
+    async handleReturn () {
       this.showModal = true
-      this.$store.dispatch("createAccount")
+      //this.$store.dispatch("createAccount")
+      console.log("CONTINUE LOG STATUS "+this.$store.state.isLoggedIn)
+      if(this.$store.state.isLoggedIn == true){
+        try {
+    const token =   localStorage.getItem('auth_token'); 
+    const email =     localStorage.getItem('email'); 
+    const tickets = this.$store.state.currentFlightDetailed
+   
+    const ticketArray = []
+    
+    const ticketObject = {
+      departure:tickets.departure.airport,
+      destination:tickets.arrival.airport,
+      gate: tickets.departure.gate,
+      date: tickets.flight_date,
+      seat: "e1",
+      boardingTime: tickets.departure.scheduled.replace(/([+-]\d{2}:\d{2})$/, "") // Entfernt die Zeitzoneninformationen
+    }
+          // relevevanten ticket daten in objekt nehmen
+          console.log(ticketObject)
+          ticketArray.push(ticketObject)
+    const request = {
+      tickets:ticketArray,
+      email:email
+    }
+    // Senden der Anfrage mit nur dem Token
+    const response = await fetch(this.$store.state.urlObject.ticketsUrl + '/create', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(request) // Das Token korrekt verpackt in ein JSON-Objekt
+    });
+  
+
+    
+    if (!response.ok) {
+      throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+    }
+   
+
+  } catch (error) {
+    console.error("Fehler bei der Token-Überprüfung:", error);
+    this.isLoggedIn = false;
+  }
+      }
+
       setTimeout(() => {
       this.$router.push('/');
    }, 5000);

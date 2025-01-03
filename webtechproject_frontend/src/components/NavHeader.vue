@@ -7,18 +7,78 @@
       <li class="link"><router-link to="/contact-us">Contact Us</router-link></li>
       <li class="link" v-if="!isLoggedIn"><router-link to="/login">Log In</router-link></li>
       <li class ="link" v-if="isLoggedIn"> <router-link to="/user-information">Account</router-link></li>
+      <li class ="link" v-if="isLoggedIn"> <router-link to="/user-information" @click="logoutAccount">Log Out</router-link></li>
+
     </ul>
   </nav>
 </template>
 
 <script>
 export default {
-  computed: {
-    isLoggedIn() {
-      return this.$store.state.isLoggedIn; // Benutzerstatus aus Vuex-Store abrufen
+  methods: {
+    async checkAuthStatus() {
+  try {
+    const token =   localStorage.getItem('auth_token'); 
+
+
+    // Senden der Anfrage mit nur dem Token
+    const response = await fetch(this.$store.state.urlObject.userUrl + '/check-auth', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }) // Das Token korrekt verpackt in ein JSON-Objekt
+    });
+
+    // Prüfen, ob die Anfrage erfolgreich war
+    if (!response.ok) {
+      throw new Error(`HTTP-Fehler! Status: ${response.status}`);
     }
+
+    // Die Antwort parsen
+    const isTokenValid = await response.json();
+
+    // Token-Validierung überprüfen
+    if (isTokenValid.tokenValid === true) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+
+  } catch (error) {
+    console.error("Fehler bei der Token-Überprüfung:", error);
+    this.isLoggedIn = false;
   }
-};
+},
+logoutAccount({ commit }) {
+  // Entferne das gespeicherte Token aus dem LocalStorage
+  localStorage.removeItem('auth_token'); 
+  localStorage.removeItem('email'); 
+
+  // Setze den Token und den Login-Status im Vuex-Store zurück
+  //commit('clearToken');
+ // commit('setIsLoggedOut');
+ this.isLoggedIn = false;
+  console.log("Logout erfolgreich");
+  this.$store.commit("setIsLoggedIn")
+
+  // Optional: Benutzer zur Login-Seite umleiten
+  this.$router.push('/'); // Passe die Route an deine Anwendung an
+}
+
+},
+data() {
+  return {
+    isLoggedIn: false // Initialer Status ist false
+  };
+},
+mounted() {
+  this.checkAuthStatus(); // Status bei Initialisierung überprüfen
+  console.log(this.isLoggedIn)
+  console.log(this.$store.state.token)
+}
+  }
+
 </script>
 
 

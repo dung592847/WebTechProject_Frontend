@@ -15,13 +15,13 @@
         </thead>
         <tbody>
           <tr v-for="order in orders" :key="order.id">
-            <td>{{ order.flightNumber }}</td>
+            <td>{{ order.ticket_id }}</td>
             <td>{{ order.departure }}</td>
             <td>{{ order.destination }}</td>
             <td>{{ order.date }}</td>
             <td>{{ order.seat }}</td>
             <td id="button-wrapper">
-              <button id="button"> Cancel Ticket</button>
+              <button id="button" @click="cancelTicket(order.ticket_id)">Cancel Ticket</button>
              
             </td>
           </tr>
@@ -37,12 +37,76 @@
   export default {
     data() {
       return {
-        orders: [
-          { id: 1, flightNumber: 'LH123', departure: 'Berlin', destination: 'New York', date: '2024-12-25', seat: '12A' },
-          { id: 2, flightNumber: 'UA456', departure: 'Paris', destination: 'Tokyo', date: '2024-12-26', seat: '14B' },
-          { id: 3, flightNumber: 'EK789', departure: 'London', destination: 'Dubai', date: '2024-12-27', seat: '16C' }
-        ]
+        orders: {}
       };
+    },
+    methods: {
+      async getTicketsForUser() {
+  try {
+    const token =  localStorage.getItem("auth_token") // Hol dir das Token aus dem Vuex-Store oder lokalem Storage
+    const email = localStorage.getItem("email"); 
+
+    console.log(token)
+
+    // Die URL für die Anfrage
+    const url = this.$store.state.urlObject.ticketsUrl+"/user/"+email;
+    console.log(url)
+    // Die Anfrage mit dem Bearer Token
+    const response = await fetch(url, {
+      method: "GET",  // GET-Anfrage
+      headers: {
+        "Content-Type": "application/json",  // Kopfzeile für JSON-Daten
+        "Authorization": `Bearer ${token}`,  // Bearer-Token als Authorization-Header
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+    }
+
+    const data = await response.json();  // Antworte die Antwort als JSON
+    this.orders = data
+    console.log("Tickets:", data); // Zeige die erhaltenen Daten an
+
+    // Optional: Setze den Zustand des Stores oder der Komponente basierend auf den Tickets
+    // this.$store.commit('setTickets', data);
+
+  } catch (error) {
+    console.error("Fehler bei der API-Anfrage:", error);
+  }
+},
+async cancelTicket(ticketId) {
+      try {
+        const token = localStorage.getItem("auth_token");
+
+        // API-URL für das Löschen des Tickets, unter Verwendung der ticket_id
+        const url = `${this.$store.state.urlObject.ticketsUrl}/${ticketId}`;
+        console.log(url)
+        // Anfrage zum Löschen des Tickets
+        const response = await fetch(url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+        }
+
+        // Wenn das Ticket erfolgreich gelöscht wurde, entferne es aus der Liste
+        this.orders = this.orders.filter(order => order.ticket_id !== ticketId);
+        console.log("Ticket gelöscht:", ticketId);
+      } catch (error) {
+        console.error("Fehler beim Löschen des Tickets:", error);
+      }
+    },
+
+      
+    },
+    mounted(){
+      this.getTicketsForUser()
     }
   };
   </script>
