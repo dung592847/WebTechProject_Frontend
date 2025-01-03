@@ -51,29 +51,25 @@ export default {
   }
 },
 logoutAccount({ commit }) {
-  // Entferne das gespeicherte Token aus dem LocalStorage
+
   localStorage.removeItem('auth_token'); 
   localStorage.removeItem('email'); 
-
-  // Setze den Token und den Login-Status im Vuex-Store zurück
-  //commit('clearToken');
- // commit('setIsLoggedOut');
  this.isLoggedIn = false;
   console.log("Logout erfolgreich");
   this.$store.commit("setIsLoggedIn")
 
-  // Optional: Benutzer zur Login-Seite umleiten
-  this.$router.push('/'); // Passe die Route an deine Anwendung an
+
+  this.$router.push('/');
 }
 
 },
 data() {
   return {
-    isLoggedIn: false // Initialer Status ist false
+    isLoggedIn: false
   };
 },
 mounted() {
-  this.checkAuthStatus(); // Status bei Initialisierung überprüfen
+  this.checkAuthStatus(); 
   console.log(this.isLoggedIn)
   console.log(this.$store.state.token)
 }

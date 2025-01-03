@@ -5,7 +5,8 @@ export default createStore({
   state: {    
     isLoggedIn:false,
 
-    user: {},
+    user: {
+    },
 
     /**
      * In diesem Objekt, werden die User Eingaben gespeichert,
@@ -339,9 +340,9 @@ export default createStore({
         const request = {
           user:state.user,
           token: localStorage.getItem("auth_token"),
-          role:"USER"
         }
-        const url = `${state.urlObject.userUrl}/user`;
+        console.log(request)
+        const url = `${state.urlObject.userUrl}/users`;
         const response = await fetch(url, {
           method: "PUT",
           headers: {

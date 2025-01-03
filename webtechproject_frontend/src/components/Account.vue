@@ -88,12 +88,64 @@
       } catch (error) {
         console.error('Fehler beim Senden der Anfrage:', error);
       }
+    },
+    async getUserData() {
+  try {
+    // Token aus dem Local Storage abrufen
+    const token = localStorage.getItem('auth_token'); 
+
+    // Sicherstellen, dass das Token existiert
+    if (!token) {
+      throw new Error('Kein Token gefunden');
     }
+
+    // Senden der Anfrage mit dem Token im Authorization-Header
+    const response = await fetch(this.$store.state.urlObject.userUrl + '/users', {
+      method: 'GET',
+      headers: {
+        "Authorization": `Bearer ${token}`, // Token im Header hinzufügen
+        "Content-Type": "application/json", // Optional, falls notwendig
+      },
+    });
+
+    // Prüfen, ob die Anfrage erfolgreich war
+    if (!response.ok) {
+      throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+    }
+
+    // Die Antwort parsen
+    const responseObject = await response.json();
+    console.log(responseObject);
+
+    // Benutzer aus der Antwort extrahieren und speichern
+    const responseUser = responseObject.user;
+
+    const filteredUser = {
+     firstName: responseUser.firstName,
+        lastName: responseUser.lastName,
+        email: responseUser.email,
+        password: responseUser.password,
+        city: responseUser.city,
+        country: responseUser.country,
+        phoneNumber: responseUser.phoneNumber,
+        address: responseUser.address,
+        postalCode: responseUser.postalCode,
+        gender: responseUser.gender
+    };
+
+    this.$store.commit("setUser", filteredUser);
+    this.user = { ...this.$store.state.user };
+
+  } catch (error) {
+    console.error("Fehler bei der Token-Überprüfung:", error);
+    this.isLoggedIn = false;
+  }
+}
   
      
     },
     mounted() {
-   
+    this.getUserData()
     this.user = { ...this.$store.state.user }; // Kopiere die Benutzerdaten aus dem Store in das `user`-Objekt
     console.log(this.user)
     
