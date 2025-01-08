@@ -7,8 +7,8 @@
     <header class="header__container">
       <div class="header__image__container">
         <div class="header__content">
-          <h1>Enjoy Your Dream Vacation</h1>
-          <p>Book Flights and stay packages at lowest price.</p>
+          <h1>Plan Your Perfect Getaway</h1>
+          <p>Find the best flight and accommodation deals at unbeatable prices.</p>
         </div>
         
         <!-- Searchbar mit überlappendem Effekt -->

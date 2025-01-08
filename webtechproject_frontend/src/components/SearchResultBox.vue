@@ -15,6 +15,7 @@
         </h4>
       </div>
       <div class="middleInfo">
+        <span>{{this.flightObject.airline.name}}</span>
         <div class="connection-line">
           <span class="blue-circle"></span>
           <div class="line"></div>
@@ -67,8 +68,9 @@ export default {
   },
   methods: {
     sendDetailedFlight() {
-      console.log("FlighObject: "+this.flightObject)
+      console.log("FlighObject: ",this.flightObject)
       this.$store.commit("setCurrentFlightDetailed", this.flightObject);
+      console.log("State FlighObject: ",this.$store.state.currentFlightDetailed)
     },
   },
 };

@@ -123,7 +123,7 @@ export default {
 
 .seat-section {
     margin: 30px auto;
-    border: 1px solid #435681;
+    
     padding: 20px;
     border-radius: 10px;
     max-width: 600px;

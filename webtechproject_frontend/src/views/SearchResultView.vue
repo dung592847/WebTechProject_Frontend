@@ -253,4 +253,5 @@ export default {
 .results-column :deep(.search-result-box) {
   width: 100%;
 }
+
 </style>

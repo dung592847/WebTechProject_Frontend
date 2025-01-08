@@ -137,6 +137,17 @@ export default createStore({
       }
     },
 
+    incrementTraveller(state) {
+      if(state.userInputObject.traveller<=6){
+        state.userInputObject.traveller += 1;
+      }
+      
+    },
+    decrementTraveller(state) {
+      if (state.userInputObject.traveller > 1) {
+        state.userInputObject.traveller -= 1;
+      }
+    },
 
    
 
