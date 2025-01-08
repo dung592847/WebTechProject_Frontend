@@ -166,19 +166,20 @@ export default {
 <style scoped>
 .booking__container {
   position: absolute;
-  bottom: -5rem;
+  bottom: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(100% - 6rem);
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 3rem 2rem;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   background-color: rgba(255, 255, 255, 0.7);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+ 
 }
 
 .booking__container form {

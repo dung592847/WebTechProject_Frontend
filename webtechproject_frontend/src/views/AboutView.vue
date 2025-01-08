@@ -1,7 +1,8 @@
 <template>
 
-
+<div class="nav-box">
   <NavHeader></NavHeader>
+</div>
 <AboutUs></AboutUs>
 
   <div class="wrapper">
@@ -114,13 +115,17 @@ export default {
 </script>
 
 
+
 <style scoped>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
+.nav-box{
+ width: 100%;
+ height: 100px; 
+}
 .wrapper{
   display: flex;
   justify-content: center;

@@ -1,110 +1,312 @@
 <template>
-
-<section class="section__container popular__container">
-      <h2 class="section__header">Popular Flight Destinations</h2>
-      <div class="popular__grid">
-        <div class="popular__card">
-          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
-          <div class="popular__content">
-            <div class="popular__card__header">
-              <h4>Generic Flight 1</h4>
-              <h4>$499</h4>
-            </div>
-            <p>New York City, USA</p>
+  <main>
+    <div>
+      <span>discover</span>
+      <h1>Our Popular Flights</h1>
+      <hr />
+      <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+      </p>
+    
+    </div>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide--one">
+          <div>
+            <h2>Destination</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+            </p>
+            <a href="#" target="_blank">explore</a>
           </div>
         </div>
-        <div class="popular__card">
-          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
-          <div class="popular__content">
-            <div class="popular__card__header">
-              <h4>Generic Flight 2</h4>
-              <h4>$549</h4>
-            </div>
-            <p>Paris, France</p>
+        <div class="swiper-slide swiper-slide--two">
+          <div>
+            <h2>Destination</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+            </p>
+            <a href="#" target="_blank">explore</a>
           </div>
         </div>
-        <div class="popular__card">
-          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
-          <div class="popular__content">
-            <div class="popular__card__header">
-              <h4>The Peninsula</h4>
-              <h4>$599</h4>
-            </div>
-            <p>Generic Flight 3</p>
+        <div class="swiper-slide swiper-slide--three">
+          <div>
+            <h2>Destination</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+            </p>
+            <a href="#" target="_blank">explore</a>
           </div>
         </div>
-        <div class="popular__card">
-          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
-          <div class="popular__content">
-            <div class="popular__card__header">
-              <h4>Generic Flight 4</h4>
-              <h4>$449</h4>
-            </div>
-            <p>Dubai, United Arab Emirates</p>
+        <div class="swiper-slide swiper-slide--four">
+          <div>
+            <h2>Destination</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+            </p>
+            <a href="#" target="_blank">explore</a>
           </div>
         </div>
-        <div class="popular__card">
-          <img src="https://placehold.co/600x400" alt="popular flight destinations" />
-          <div class="popular__content">
-            <div class="popular__card__header">
-              <h4>Generic Flight 5</h4>
-              <h4>$649</h4>
-            </div>
-            <p>Tokyo, Japan</p>
-          </div>
-        </div>
-        <div class="popular__card">
-           <img src="https://placehold.co/600x400" alt="popular flight destinations" />
-          <div class="popular__content">
-            <div class="popular__card__header">
-              <h4>Generic Flight 6</h4>
-              <h4>$549</h4>
-            </div>
-            <p>Singapore</p>
+        <div class="swiper-slide swiper-slide--five">
+          <div>
+            <h2>Destination</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+            </p>
+            <a href="#" target="_blank">explore</a>
           </div>
         </div>
       </div>
-    </section>
-
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+ 
+  </main>
 </template>
 
+<script>
+import Swiper, { Navigation, Pagination, Keyboard, Mousewheel, EffectCoverflow } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
+
+Swiper.use([Navigation, Pagination, Keyboard, Mousewheel, EffectCoverflow]);
+
+export default {
+  mounted() {
+    new Swiper(".swiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 3,
+        slideShadows: true,
+      },
+      keyboard: {
+        enabled: true,
+      },
+      mousewheel: {
+        thresholdDelta: 70,
+      },
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 1,
+        },
+        1024: {
+          slidesPerView: 2,
+        },
+        1560: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  },
+};
+</script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap");
 
-
-
-.popular__grid {
-  margin-top: 4rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 
-.popular__card {
-  overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+main {
+  position: relative;
+  width: calc(85% - 8rem);
+  margin: 0 auto;
+  min-height: 50vh;
+  height: 40vh;
+  column-gap: 3rem;
+  padding-block: min(20vh, 3rem);
 }
 
-.popular__content {
-  padding: 2rem;
+main > div span {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+  color: #717171;
 }
 
-.popular__card__header {
+main > div h1 {
+  text-transform: capitalize;
+  letter-spacing: 0.8px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3.4375rem, 3.25rem + 0.75vw, 4rem);
+  background-color: #2C3855;
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+main > div hr {
+  display: block;
+  background: #2C3855;
+  height: 0.25rem;
+  width: 6.25rem;
+  border: none;
+  margin: 1.125rem 0 1.875rem 0;
+}
+
+main > div p {
+  line-height: 1.6;
+}
+
+main a {
+  display: inline-block;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #717171;
+  font-weight: 500;
+  background: #fff;
+  border-radius: 3.125rem;
+  transition: 0.3s ease-in-out;
+}
+
+main > div > a {
+  border: 2px solid #c2c2c2;
+  margin-top: 2.188rem;
+  padding: 0.625rem 1.875rem;
+}
+
+main > div > a:hover {
+  border: 0.125rem solid #005baa;
+  color: #005baa;
+}
+
+.swiper {
+  width: 100%;
+  padding-top: 3.125rem;
+}
+
+.swiper-pagination-bullet,
+.swiper-pagination-bullet-active {
+  background: #fff;
+}
+
+.swiper-pagination {
+  bottom: 1.25rem !important;
+}
+
+.swiper-slide {
+  width: 18.75rem;
+  height: 28.125rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+  flex-direction: column;
+  justify-content: end;
+  align-items: self-start;
 }
 
-.popular__card__header h4 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--text-dark);
+.swiper-slide h2 {
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  margin-bottom: 0.625rem;
+  padding: 0 0 0 1.563rem;
+  text-transform: uppercase;
 }
 
-.popular__content p {
-  color: var(--text-light);
+.swiper-slide p {
+  color: #dadada;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  padding: 0 1.563rem;
+  line-height: 1.6;
+  font-size: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
+
+.swiper-slide a {
+  margin: 1.25rem 1.563rem 3.438rem 1.563rem;
+  padding: 0.438em 1.875rem;
+  font-size: 0.9rem;
+}
+
+.swiper-slide a:hover {
+  color: #005baa;
+}
+
+.swiper-slide div {
+  display: none;
+  opacity: 0;
+  padding-bottom: 0.625rem;
+}
+
+.swiper-slide-active div {
+  display: block;
+  opacity: 1;
+}
+
+.swiper-slide--one {
+  background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+    url("https://images.unsplash.com/photo-1628944682084-831f35256163?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
+      no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--two {
+  background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+    url("https://images.unsplash.com/photo-1515309025403-4b0184873cef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80")
+      no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--three {
+  background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+    url("https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+      no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--four {
+  background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+    url("https://images.unsplash.com/photo-1598977123118-4e30ba3c4f5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+      no-repeat 50% 50% / cover;
+}
+
+.swiper-slide--five {
+  background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
+    url("https://images.unsplash.com/photo-1570481662006-a3a1374699e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80")
+      no-repeat 50% 50% / cover;
+}
+
+.swiper-3d .swiper-slide-shadow-left,
+.swiper-3d .swiper-slide-shadow-right {
+  background-image: none;
+}
+
+@media screen and (min-width: 48rem) {
+  main {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: 93.75rem) {
+  .swiper {
+    width: 85%;
+  }
+}
+
 </style>

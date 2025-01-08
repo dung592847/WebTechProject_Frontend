@@ -1,5 +1,7 @@
 <template>
-    <NavHeader></NavHeader>
+    <div class="nav-box">
+  <NavHeader></NavHeader>
+</div>
     <ContactUs></ContactUs> 
   <FooterComponent></FooterComponent>
   </template>

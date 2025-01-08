@@ -8,7 +8,7 @@
            ArmanAir is a Website where you can book your next vacation!
           </p>
           <p>
-            With a user-friendly interface and a vast selection of hotels,
+            With a user-friendly interface and a vast selection of Flights,
             ArmanAir aims to provide a stress-free experience for travelers
             seeking the perfect stay.
           </p>
@@ -46,6 +46,7 @@
 
 .footer {
   background-color: var(--extra-light);
+  margin-top: 100px;
 }
 
 .footer__container {
