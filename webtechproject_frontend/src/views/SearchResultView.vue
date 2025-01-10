@@ -14,31 +14,77 @@
                 <h3 class="filter-title">Filter</h3>
                 <div class="filter-section">
                   <h4>Price Range</h4>
-                  <input type="range" min="0" max="1000" value="200" class="price-slider" />
+                  <span class="selected-price">€{{ selectedPrice }}</span>
+                  <input 
+                    type="range" 
+                    :min="minPrice" 
+                    :max="maxPrice" 
+                    v-model="selectedPrice" 
+                    class="price-slider" 
+                  />
                 </div>
                 <div class="filter-section">
                   <h4>Airlines</h4>
-                  <label><input type="checkbox" /> Lufthansa</label>
-                  <label><input type="checkbox" /> British Airways</label>
+                  <select 
+                    v-model="selectedAirlines" 
+                    multiple 
+                    class="airline-select"
+                  >
+                    <option value="">All Airlines</option>
+                    <option 
+                      v-for="airline in availableAirlines" 
+                      :key="airline" 
+                      :value="airline"
+                    >
+                      {{ airline }}
+                    </option>
+                  </select>
+                  <div class="selected-airlines" v-if="selectedAirlines.length">
+                    <div v-for="airline in selectedAirlines" :key="airline" class="airline-tag">
+                      {{ airline }}
+                      <span @click="removeAirline(airline)" class="remove-airline">&times;</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="filter-section">
                   <h4>Flight Times</h4>
-                  <label><input type="checkbox" /> Morning</label>
-                  <label><input type="checkbox" /> Afternoon</label>
-                  <label><input type="checkbox" /> Evening</label>
-                </div>
-                <div class="filter-button">
-                  <button>Filter</button>
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      value="morning"
+                      v-model="selectedTimes"
+                    /> 
+                    Morning (6:00 - 11:59)
+                  </label>
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      value="afternoon"
+                      v-model="selectedTimes"
+                    /> 
+                    Afternoon (12:00 - 17:59)
+                  </label>
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      value="evening"
+                      v-model="selectedTimes"
+                    /> 
+                    Evening (18:00 - 5:59)
+                  </label>
                 </div>
               </div>
             </div>
 
             <!-- Right column for search results -->
             <div class="results-column">
-              <SearchResultBox class="hidden" v-observe
+              <SearchResultBox
+                class="hidden"
+                v-observe
                 v-for="(flight, index) in paginatedResults"
                 :key="index"
                 :flightObject="flight"
+                :class="{ 'bg-color': index % 2 === 1 }"
               />
 
               <!-- Pagination Controls -->
@@ -81,26 +127,144 @@ export default {
       arrival_city: "",
       traveller: "",
       departure_date: "",
-      currentPage: 1, // Aktuelle Seite
-      resultsPerPage: 7, // Anzahl der Ergebnisse pro Seite
+      currentPage: 1,
+      resultsPerPage: 7,
+      selectedPrice: 0,
+      selectedAirlines: [],
+      selectedTimes: [],
     };
   },
   computed: {
-    // Gesamte Anzahl der Seiten basierend auf den Suchergebnissen
-    totalPages() {
-      return Math.ceil(this.$store.state.flightAPIcallData.length / this.resultsPerPage);
+    allFlights() {
+      return this.$store.state.flightAPIcallData;
     },
-    // Ergebnisse für die aktuelle Seite
+    minPrice() {
+      if (!this.allFlights.length) return 0;
+      return Math.floor(Math.min(...this.allFlights.map(flight => this.calculateFlightPrice(flight))));
+    },
+    maxPrice() {
+      if (!this.allFlights.length) return 1000;
+      return Math.ceil(Math.max(...this.allFlights.map(flight => this.calculateFlightPrice(flight))));
+    },
+    availableAirlines() {
+      return [...new Set(this.allFlights.map(flight => flight.airline.name))];
+    },
+    filteredResults() {
+      return this.allFlights.filter(flight => {
+        const flightPrice = this.calculateFlightPrice(flight);
+        const departureTime = flight.departure?.scheduled ? new Date(flight.departure.scheduled) : null;
+        const hour = departureTime ? departureTime.getHours() : 0;
+        
+        const meetsTimeFilter = this.selectedTimes.length === 0 || this.selectedTimes.some(time => {
+          switch(time) {
+            case 'morning': return hour >= 6 && hour < 12;
+            case 'afternoon': return hour >= 12 && hour < 18;
+            case 'evening': return hour >= 18 || hour < 6;
+            default: return false;
+          }
+        });
+
+        const meetsAirlineFilter = this.selectedAirlines.length === 0 || 
+          this.selectedAirlines.includes(flight.airline.name);
+
+        const meetsPriceFilter = flightPrice <= this.selectedPrice;
+
+        return meetsTimeFilter && meetsAirlineFilter && meetsPriceFilter;
+      });
+    },
+    totalPages() {
+      return Math.ceil(this.filteredResults.length / this.resultsPerPage);
+    },
     paginatedResults() {
       const start = (this.currentPage - 1) * this.resultsPerPage;
       const end = start + this.resultsPerPage;
-      return this.$store.state.flightAPIcallData.slice(start, end);
+      return this.filteredResults.slice(start, end);
     },
+  },
+  methods: {
+    takeEmit(data) {
+      // Your existing takeEmit logic
+    },
+    calculateFlightPrice(flight) {
+      if (!flight.departure?.scheduled || !flight.arrival?.scheduled) return 0;
+      
+      const depTime = new Date(flight.departure.scheduled);
+      const arrTime = new Date(flight.arrival.scheduled);
+      const durationMs = arrTime - depTime;
+      const durationInMinutes = Math.floor(durationMs / (1000 * 60));
+      
+      const basePrice = 50;
+      const hourlyRate = 75;
+      const hoursComponent = (durationInMinutes / 60) * hourlyRate;
+      const longFlightPremium = durationInMinutes > 180 ? 100 : 0;
+      const totalPrice = basePrice + hoursComponent + longFlightPremium;
+      
+      return Math.round(totalPrice / 10) * 10;
+    },
+    removeAirline(airline) {
+      this.selectedAirlines = this.selectedAirlines.filter(a => a !== airline);
+    }
+  },
+  watch: {
+    filteredResults() {
+      // Reset to first page when filters change
+      this.currentPage = 1;
+    }
+  },
+  created() {
+    // Initialize the price slider to max value
+    this.selectedPrice = this.maxPrice;
   },
 };
 </script>
 
 <style scoped>
+/* Previous styles remain unchanged */
+
+.airline-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  background-color: white;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.airline-select option {
+  padding: 8px;
+}
+
+.selected-airlines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.airline-tag {
+  background-color: #e3f2fd;
+  color: #0070ff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+.remove-airline {
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 2px;
+}
+
+.remove-airline:hover {
+  color: #0056cc;
+}
+
+/* Rest of the previous styles... */
 .hidden {
   opacity: 0;
   filter: blur(5px);
@@ -123,7 +287,6 @@ export default {
 .hidden:nth-child(4){
   transition-delay: 600ms;
 }
-
 
 .pagination {
   display: flex;
@@ -151,7 +314,6 @@ export default {
   color: white;
 }
 
-
 .page-wrapper {
   min-height: 100vh;
   display: flex;
@@ -160,7 +322,7 @@ export default {
 
 .body-wrapper {
   flex: 1;
-  padding-top: 80px; /* Space for fixed navigation */
+  padding-top: 80px;
 }
 
 .page-container {
@@ -216,6 +378,7 @@ export default {
 
 .filter-section {
   margin-bottom: 2rem;
+  text-align: left;
 }
 
 .filter-section:last-child {
@@ -254,4 +417,12 @@ export default {
   width: 100%;
 }
 
+.bg-color{
+  background-color: #f4f6f8c7;
+}
+
+.selected-price{
+  text-align: center;
+  font-weight: 600;
+}
 </style>

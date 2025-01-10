@@ -1,6 +1,6 @@
 <template>
     <div class="orders-container">
-      <h1>Meine Bestellungen</h1>
+      <h1>My Tickets</h1>
       <table v-if="orders.length > 0">
         <thead>
           <tr>
@@ -20,16 +20,16 @@
             <td>{{ order.destination }}</td>
             <td>{{ order.date }}</td>
             <td>{{ order.seat }}</td>
-            <td id="button-wrapper">
-              <button id="button" @click="cancelTicket(order.ticket_id)">Cancel Ticket</button>
+            <td id="button-wrapper"  @click="cancelTicket(order.ticket_id)">
+             Cancel Ticket
              
             </td>
           </tr>
         </tbody>
       </table>
-      <p v-else>Keine Bestellungen gefunden.</p>
+      <p v-else>No tickets found.</p>
   
-      <router-link to="/" class="back-button">Zurück zur Startseite</router-link>
+      <router-link to="/" class="back-button">Back To Homepage</router-link>
     </div>
   </template>
   
@@ -113,18 +113,20 @@ async cancelTicket(ticketId) {
   
   <style scoped>
 
-  #button{
+
+  #button-wrapper{
+    padding: 0%;
     background-color: red;
     color: white;
     text-align: center;
-    width: 100%;
+    width: 120px;
     height: 100%;
     margin: 0;
     padding: 0%
   }
 
-  #button-wrapper{
-    padding: 0%;
+  #button-wrapper:hover {
+    background-color: #921a11;
   }
 
   .orders-container {

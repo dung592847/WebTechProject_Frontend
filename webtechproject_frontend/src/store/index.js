@@ -73,13 +73,17 @@ export default createStore({
 
     ticketsList:[],
     seatsList:[],
-    token:""
+    token:"",
+    ticketPrice:0
 
   },
   getters: {
 
   },
   mutations: {
+    setTicketPrice(state, price) { 
+      state.ticketPrice = price
+      },
     setRegistrationObjectToObject(state, object) { 
       state.registrationObject = object
       },
@@ -87,9 +91,13 @@ export default createStore({
     state.user = userObject
     }
     ,
-    setIsLoggedIn(state){
-      state.isLoggedIn = !(state.isLoggedIn)
+    setIsLoggedInTrue(state){
+      state.isLoggedIn = true
     },
+    setIsLoggedInFalse(state){
+      state.isLoggedIn = false
+    },
+
 
     /**
      * Setzt einen beliebigen Wert im `userInputObject`, sofern der Schlüssel existiert.
@@ -253,7 +261,7 @@ export default createStore({
           "https://api.aviationstack.com/v1/flights",
           {
             params: {
-              access_key: "4c46ff1403a80f1ada059e4930c93775",
+              access_key: "b4a0acc6168e874cc4b1e80e105d4f82",
               dep_iata: state.userInputObject.departureIata, 
               arr_iata: state.userInputObject.arrivalIata
             },
@@ -339,7 +347,7 @@ export default createStore({
         commit('setToken', token); 
         localStorage.setItem('auth_token', token); 
         localStorage.setItem('email', emailUser); 
-        commit("setIsLoggedIn");
+        commit("setIsLoggedInTrue");
         console.log(token)
       } catch (error) {
         console.error("Fehler bei der API-Anfrage:", error);
@@ -358,6 +366,7 @@ export default createStore({
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+             Authorization: `Bearer ${request.token}`
           },
           body: JSON.stringify(request),  // Die Benutzerdaten als JSON im Request-Body übermitteln
         });

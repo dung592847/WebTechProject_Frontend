@@ -140,8 +140,7 @@ this.isLoggedIn = false;
 
     mounted() {
   this.checkAuthStatus(); // Status bei Initialisierung überprüfen
-  console.log(this.isLoggedIn)
-  console.log(this.$store.state.token)
+
 }
   }
   </script>
@@ -157,7 +156,7 @@ this.isLoggedIn = false;
   }
   
   .divBody2 {
-    max-width: 700px;
+    max-width: 1000px;
     width: 100%;
     background-color: #fff;
     padding: 25px 30px;

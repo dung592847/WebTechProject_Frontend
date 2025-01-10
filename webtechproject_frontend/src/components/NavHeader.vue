@@ -9,9 +9,9 @@
     <div class="nav__logo">ArmanAir</div>
 
     <ul class="nav__right">
-      <li class="link login" v-if="!isLoggedIn"><router-link to="/login">Log In</router-link></li>
-      <li class="link blurr" v-if="isLoggedIn"><router-link to="/user-information">Account</router-link></li>
-      <li class="link login" v-if="isLoggedIn">
+      <li class="link login" v-if="!this.$store.state.isLoggedIn"><router-link to="/login">Log In</router-link></li>
+      <li class="link blurr" v-if="this.$store.state.isLoggedIn"><router-link to="/user-information">Account</router-link></li>
+      <li class="link login" v-if="this.$store.state.isLoggedIn">
         <router-link to="/" @click="logoutAccount">Log Out</router-link>
       </li>
     </ul>
@@ -37,17 +37,20 @@ export default {
         }
 
         const isTokenValid = await response.json();
-        this.isLoggedIn = isTokenValid.tokenValid === true;
+        if(isTokenValid.tokenValid == true){
+          this.$store.commit("setIsLoggedInTrue");
+        }
+        
       } catch (error) {
         console.error("Fehler bei der Token-Überprüfung:", error);
-        this.isLoggedIn = false;
+        this.$store.commit("setIsLoggedInFalse");
       }
     },
     logoutAccount() {
       localStorage.removeItem('auth_token');
       localStorage.removeItem('email');
       this.isLoggedIn = false;
-      this.$store.commit("setIsLoggedIn");
+      this.$store.commit("setIsLoggedInFalse");
       console.log("Logout erfolgreich");
       this.$router.push('/');
     },

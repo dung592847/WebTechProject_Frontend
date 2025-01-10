@@ -2,14 +2,11 @@
   <div class="searchresult-wrapper">
     <div class="flight-info">
       <div class="info-box">
-        <!-- Abflugszeit -->
         <h4 class="bold-text">{{ flightObject.departure?.scheduled?.slice(11, 16) || 'N/A' }}</h4>
-        <!-- Abflug IATA + Datum -->
         <h4>
           {{ flightObject.departure?.iata || 'N/A' }} · 
           {{ flightObject.departure?.scheduled ? new Date(flightObject.departure.scheduled).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : 'N/A' }}
         </h4>
-        <!-- Abflug Flughafenname -->
         <h4 class="ellipsis" :title="flightObject.departure?.airport || 'N/A'">
           {{ flightObject.departure?.airport?.slice(0, 10) || 'N/A' }}
         </h4>
@@ -23,26 +20,21 @@
           <div class="line"></div>
           <span class="blue-circle"></span>
         </div>
-        <!-- Flugzeit -->
         <h4>{{ flightDuration }}</h4>
       </div>
       <div class="info-box">
-        <!-- Ankunftszeit -->
         <h4 class="bold-text">{{ flightObject.arrival?.scheduled?.slice(11, 16) || 'N/A' }}</h4>
-        <!-- Ankunft IATA + Datum -->
         <h4>
           {{ flightObject.arrival?.iata || 'N/A' }} · 
           {{ flightObject.arrival?.scheduled ? new Date(flightObject.arrival.scheduled).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : 'N/A' }}
         </h4>
-        <!-- Ankunft Flughafenname -->
         <h4 class="ellipsis" :title="flightObject.arrival?.airport || 'N/A'">
           {{ flightObject.arrival?.airport?.slice(0, 10) || 'N/A' }}
         </h4>
       </div>
     </div>
     <div class="price-info">
-      <!-- Preis -->
-      <h4>€</h4>
+      <h4>€{{ flightPrice }} p.P.</h4>
       <router-link to="/flight-details" @click="sendDetailedFlight">
         <button class="view-details">View Details</button>
       </router-link>
@@ -51,12 +43,14 @@
 </template>
 
 <script>
+
+
 export default {
   props: ["flightObject"],
   computed: {
     flightDuration() {
       if (!this.flightObject?.departure?.scheduled || !this.flightObject?.arrival?.scheduled) {
-        return 'N/A'; // Fallback, wenn Zeitangaben fehlen
+        return 'N/A';
       }
       const depTime = new Date(this.flightObject.departure.scheduled);
       const arrTime = new Date(this.flightObject.arrival.scheduled);
@@ -65,12 +59,36 @@ export default {
       const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
       return `${hours}h ${minutes}m`;
     },
+    flightPrice() {
+      if (this.flightDuration === 'N/A') return 0;
+      const [hours, minutes] = this.flightDuration.split('h ');
+      const totalMinutes = (parseInt(hours) * 60) + parseInt(minutes.replace('m', ''));
+      const basePrice = 50;
+      const durationInMinutes =totalMinutes
+    const hourlyRate = 75;
+    const hoursComponent = (durationInMinutes / 60) * hourlyRate;
+    const longFlightPremium = durationInMinutes > 180 ? 100 : 0;
+    const totalPrice = basePrice + hoursComponent + longFlightPremium;
+    this.price =(totalPrice / 10) * 10
+ 
+    return (totalPrice / 10) * 10; 
+    }
   },
+  data() {
+        return {
+         price:0
+            };
+    }
+  ,
   methods: {
     sendDetailedFlight() {
-      console.log("FlighObject: ",this.flightObject)
-      this.$store.commit("setCurrentFlightDetailed", this.flightObject);
-      console.log("State FlighObject: ",this.$store.state.currentFlightDetailed)
+      const flightWithPrice = {
+        ...this.flightObject,
+      };
+      this.$store.commit("setCurrentFlightDetailed", flightWithPrice);
+      console.log(this.price)
+      this.$store.commit("setTicketPrice", this.price );
+
     },
   },
 };
@@ -153,6 +171,12 @@ export default {
   justify-content: center;
   align-items: center;
   width: 25%;
+}
+
+.price-info h4 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .view-details {

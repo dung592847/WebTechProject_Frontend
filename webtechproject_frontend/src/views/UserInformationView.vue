@@ -1,5 +1,7 @@
 <template>
-<NavHeader></NavHeader>
+<div class="nav-box">
+  <NavHeader></NavHeader>
+</div>
 
 <Account></Account>
 <Orders></Orders>
@@ -35,3 +37,11 @@ data(){
 }
 }
 </script>
+
+<style>
+.nav-box{
+ width: 100%;
+ height: 100px; 
+}
+
+</style>

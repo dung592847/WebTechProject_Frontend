@@ -1,54 +1,44 @@
 <template>
     <div class="account-container">
-      <h1>Mein Konto bearbeiten</h1>
+      <h1>Account</h1>
       <form @submit.prevent="updateAccount">
         <div class="form-group">
-          <label for="firstName">Vorname:</label>
+          <label for="firstName">First Name:</label>
           <input v-model="user.firstName" id="firstName" type="text" />
         </div>
   
         <div class="form-group">
-          <label for="lastName">Nachname:</label>
+          <label for="lastName">Last Name:</label>
           <input v-model="user.lastName" id="lastName" type="text" >
         </div>
   
         <div class="form-group">
-          <label for="email">E-Mail:</label>
-          <input v-model="user.email" id="email" type="email" />
-        </div>
-  
-        <div class="form-group">
-          <label for="password">Passwort:</label>
-          <input v-model="user.password" id="password" type="password" />
-        </div>
-  
-        <div class="form-group">
-          <label for="country">Land:</label>
+          <label for="country">Country:</label>
           <input v-model="user.country" id="country" type="text" />
         </div>
   
         <div class="form-group">
-          <label for="city">Stadt:</label>
+          <label for="city">City:</label>
           <input v-model="user.city" id="city" type="text" />
         </div>
   
         <div class="form-group">
-          <label for="phoneNumber">Telefonnummer:</label>
+          <label for="phoneNumber">Phone Number:</label>
           <input v-model="user.phoneNumber" id="phoneNumber" type="tel" />
         </div>
   
         <div class="form-group">
-          <label for="address">Adresse:</label>
+          <label for="address">Address:</label>
           <input v-model="user.address" id="address" type="text" />
         </div>
   
         <div class="form-group">
-          <label for="postalCode">Postleitzahl:</label>
+          <label for="postalCode">Zip code:</label>
           <input v-model="user.postalCode" id="postalCode" type="text" />
         </div>
   
         <div class="form-group">
-          <label for="gender">Geschlecht:</label>
+          <label for="gender">Gender:</label>
           <select v-model="user.gender" id="gender">
             <option value="male">male</option>
             <option value="female">female</option>
@@ -68,8 +58,6 @@
         user: {
           firstName: '',
           lastName: '',
-          email: '',
-          password: '',
           country: '',
           city: '',
           phoneNumber: '',
@@ -123,8 +111,6 @@
     const filteredUser = {
      firstName: responseUser.firstName,
         lastName: responseUser.lastName,
-        email: responseUser.email,
-        password: responseUser.password,
         city: responseUser.city,
         country: responseUser.country,
         phoneNumber: responseUser.phoneNumber,
@@ -155,8 +141,8 @@
   
   <style scoped>
   .account-container {
-    max-width: 600px;
-    margin: auto;
+    max-width: 800px;
+    margin: 50px auto;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;

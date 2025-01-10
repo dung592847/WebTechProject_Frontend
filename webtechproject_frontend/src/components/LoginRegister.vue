@@ -168,7 +168,7 @@
         });
 
 
-        this.$store.commit("setIsLoggedIn")
+        this.$store.commit("setIsLoggedInTrue")
         console.log("State log status "+this.$store.state.isLoggedIn)
         this.$router.push('/');
 

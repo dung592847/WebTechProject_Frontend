@@ -1,6 +1,7 @@
 <template>
     <div class="seat-selection">
-        <h1 class="title">Bitte wählen Sie einen Sitzplatz aus</h1>
+        <br>
+        <h1 class="title">Choose a seat</h1>
 
         <!-- Sitzbereiche -->
         <div class="seat-section">
@@ -139,7 +140,7 @@ export default {
     font-weight: bold;
     text-align: right;
     width: 100px;
-   transform: rotate(-45deg);
+   
 }
 
 .business-label {
