@@ -93,7 +93,6 @@ export default {
                     alert(`Sie können maximal ${this.$store.state.userInputObject.traveller} Sitzplätze auswählen.`);
                     return;
                 }
-            // Füge den Sitzplatz hinzu
             this.$store.commit("addToSeatsList",{seatId})
             console.log(this.$store.state.seatsList)
             this.selectedSeats.push(seatId);

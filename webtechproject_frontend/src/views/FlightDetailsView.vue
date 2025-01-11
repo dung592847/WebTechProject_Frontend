@@ -1,5 +1,4 @@
 <template>
-  <!-- Previous template code remains unchanged until traveller-information -->
   <div class="nav-box">
     <NavHeader></NavHeader>
   </div>
@@ -13,7 +12,6 @@
       </div>
 
       <div class="arrival-departure-information bg-color">
-        <!-- Previous arrival/departure code -->
         <div class="departure-arrival-wrapper">
           <div class="departure">
             <h2>Departure:</h2>
@@ -43,53 +41,35 @@
       </div>
 
       <div class="traveller-information">
-        <div v-for="(traveller, index) in travellers" :key="index" class="info-container">
-          <h2>Traveller {{ index + 1 }}</h2>
+        <div v-for="index in numberOfTravellers" :key="index" class="info-container">
+          <h2>Traveller {{ index }}</h2>
 
           <div class="gender-selection">
             <div class="radio-option">
-              <input 
-                type="radio" 
-                :id="'male' + index" 
-                value="Male" 
-                v-model="traveller.gender" 
-              />
-              <label :for="'male' + index">Male</label>
+              <input type="radio" id="male" :value="'Male'" v-model="travellerData[index-1].gender" />
+              <label for="male">Male</label>
             </div>
             <div class="radio-option">
-              <input 
-                type="radio" 
-                :id="'female' + index" 
-                value="Female" 
-                v-model="traveller.gender" 
-              />
-              <label :for="'female' + index">Female</label>
+              <input type="radio" id="female" :value="'Female'" v-model="travellerData[index-1].gender" />
+              <label for="female">Female</label>
             </div>
           </div>
 
           <div class="name-inputs">
-            <input 
-              type="text" 
-              placeholder="First Name" 
-              v-model="traveller.firstName" 
-            />
-            <input 
-              type="text" 
-              placeholder="Last Name" 
-              v-model="traveller.lastName" 
-            />
+            <input type="text" placeholder="First Name" v-model="travellerData[index-1].firstName" />
+            <input type="text" placeholder="Last Name" v-model="travellerData[index-1].lastName" />
           </div>
 
           <div class="date-selection">
-            <select v-model="traveller.day">
+            <select v-model="travellerData[index-1].day">
               <option value="">Day</option>
               <option v-for="d in 31" :key="d" :value="d">{{ d }}</option>
             </select>
-            <select v-model="traveller.month">
+            <select v-model="travellerData[index-1].month">
               <option value="">Month</option>
-              <option v-for="(m, idx) in months" :key="idx" :value="idx + 1">{{ m }}</option>
+              <option v-for="(m, index) in months" :key="index" :value="index + 1">{{ m }}</option>
             </select>
-            <select v-model="traveller.year">
+            <select v-model="travellerData[index-1].year">
               <option value="">Year</option>
               <option v-for="y in years" :key="y" :value="y">{{ y }}</option>
             </select>
@@ -102,7 +82,6 @@
       </div>
       <Contactform></Contactform>
     </div>
-
     <div class="right-price">
       <div class="destination-box">
         <h4>Your Destination</h4>
@@ -111,13 +90,12 @@
 
       <div class="additional-info">
         <p>Travellers</p>
-        <span>Adult</span>
+        <span> Adult</span>
         <button @click="decrementTraveller">-</button>
-        <span>{{ numberOfTravellers }}</span>
+        <span>{{ this.numberOfTravellers}}</span>
         <button @click="incrementTraveller">+</button>
       </div>
 
-      <!-- Rest of the right-price content -->
       <div class="additional-info">
         <p>Baggage</p>
         <span>Hand luggage included</span>
@@ -193,43 +171,44 @@ export default {
         loungeAccess: 20,
         fastTrackSecurity: 15,
       },
-      travellers: [],
-      months: [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-      ],
-      years: Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i),
-      numberOfTravellers: 1
-    };
-  },
-  watch: {
-    numberOfTravellers(newCount) {
-      // Update traveller array when count changes
-      while (this.travellers.length < newCount) {
-        this.travellers.push({
+      travellerData: [
+        {
           gender: "Male",
           firstName: "",
           lastName: "",
           day: "",
           month: "",
           year: ""
-        });
-      }
-      while (this.travellers.length > newCount) {
-        this.travellers.pop();
-      }
-    }
+        }
+      ],
+      months: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      years: Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i),
+      numberOfTravellers: 1
+    };
   },
   computed: {
     totalCost() {
-      const basePrice = parseFloat(this.$store.state.ticketPrice) || 0;
-      const baggageCost = parseFloat(this.selectedOption) || 0;
+      const basePrice = this.$store.state.ticketPrice;
+      const baggageCost = this.selectedOption || 0;
       const servicesCost = this.selectedServices.reduce(
         (total, service) => total + this.serviceCosts[service],
         0
       );
       return basePrice + baggageCost + servicesCost;
-    }
+    },
   },
   methods: {
     updateBaggageCost() {
@@ -239,39 +218,38 @@ export default {
       this.$forceUpdate();
     },
     incrementTraveller() {
-      if (this.numberOfTravellers < 10) { // Maximum 10 travelers
-        this.numberOfTravellers = parseInt(this.numberOfTravellers) + 1;
+      if (this.numberOfTravellers <= 6) {
+        this.$store.commit('incrementTraveller');
+        this.numberOfTravellers += 1;
+        this.travellerData.push({
+          gender: "Male",
+          firstName: "",
+          lastName: "",
+          day: "",
+          month: "",
+          year: ""
+        });
       }
     },
     decrementTraveller() {
-      if (this.numberOfTravellers > 1) { // Minimum 1 traveler
-        this.numberOfTravellers = parseInt(this.numberOfTravellers) - 1;
+      if (this.numberOfTravellers >= 2) {
+        this.$store.commit('decrementTraveller');
+        this.numberOfTravellers -= 1;
+        this.travellerData.pop();
       }
-    },
-    getTravellerTickets() {
-      return this.travellers.map(traveller => ({
-        gender: traveller.gender,
-        firstName: traveller.firstName,
-        lastName: traveller.lastName,
-        birthDate: `${traveller.year}-${traveller.month}-${traveller.day}`,
-        ticketPrice: this.totalCost,
-        services: {
-          baggage: this.selectedOption,
-          additionalServices: this.selectedServices
-        }
-      }));
     }
   },
-  created() {
-    // Initialize first traveller
-    this.travellers = [{
+  mounted() {
+    this.numberOfTravellers = this.$store.state.userInputObject.traveller;
+    // Initialize travellerData array based on number of travellers
+    this.travellerData = Array(this.numberOfTravellers).fill().map(() => ({
       gender: "Male",
       firstName: "",
       lastName: "",
       day: "",
       month: "",
       year: ""
-    }];
+    }));
   }
 };
 </script>

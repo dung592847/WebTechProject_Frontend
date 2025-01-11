@@ -30,7 +30,6 @@
                     multiple 
                     class="airline-select"
                   >
-                    <option value="">All Airlines</option>
                     <option 
                       v-for="airline in availableAirlines" 
                       :key="airline" 
@@ -164,8 +163,9 @@ export default {
           }
         });
 
+        // Modified airline filter logic to handle empty selectedAirlines array correctly
         const meetsAirlineFilter = this.selectedAirlines.length === 0 || 
-          this.selectedAirlines.includes(flight.airline.name);
+          (flight.airline?.name && this.selectedAirlines.includes(flight.airline.name));
 
         const meetsPriceFilter = flightPrice <= this.selectedPrice;
 
@@ -217,7 +217,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 /* Previous styles remain unchanged */
 
