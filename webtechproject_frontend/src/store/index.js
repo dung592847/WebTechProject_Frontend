@@ -39,10 +39,9 @@ export default createStore({
      * Objekt mit allen URLs
      */
     urlObject:{
-      aviationStackUrl : "https://jsonplaceholder.typicode.com/posts",
       autocompleteUrl: "https://webtech-autocomplete.onrender.com/api/AirportRestAPI/municipality/",
-      userUrl: "http://localhost:8080/api/v1/auth",
-      ticketsUrl: "http://localhost:8080/api/v1/tickets"
+      userUrl: "https://usermanagementservice-v1-production.onrender.com/api/v1/auth",
+      ticketsUrl: "https://usermanagementservice-v1-production.onrender.com/api/v1/tickets"
 
     },
 
