@@ -5,53 +5,52 @@
       <h1>Our Popular Flights</h1>
       <hr />
       <p>
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+        Explore our top travel destinations and uncover the unique experiences that await you. From iconic cities to hidden gems, your next adventure starts here.
       </p>
-    
     </div>
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide swiper-slide--one">
           <div>
-            <h2>Destination</h2>
+            <h2>London</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+              Experience the vibrant culture, historic landmarks like Big Ben, and the charm of London's bustling streets. A city where tradition meets modernity.
             </p>
             <a href="#" target="_blank">explore</a>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--two">
           <div>
-            <h2>Destination</h2>
+            <h2>New York</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+              The city that never sleeps offers world-class dining, shopping, and iconic attractions such as Times Square and the Statue of Liberty.
             </p>
             <a href="#" target="_blank">explore</a>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--three">
           <div>
-            <h2>Destination</h2>
+            <h2>Paris</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+              Known as the city of love, Paris captivates visitors with its stunning architecture, art, and culinary delights, from the Eiffel Tower to cozy cafés.
             </p>
             <a href="#" target="_blank">explore</a>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--four">
           <div>
-            <h2>Destination</h2>
+            <h2>Reykjavik</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+              Discover the magic of Iceland's capital, with its geothermal wonders, vibrant arts scene, and breathtaking landscapes just outside the city.
             </p>
             <a href="#" target="_blank">explore</a>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--five">
           <div>
-            <h2>Destination</h2>
+            <h2>Strasbourg</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, ab! Dolores in dolorem cumque esse ea ducim
+              A charming blend of French and German influences, Strasbourg enchants with its half-timbered houses, canals, and famous Christmas market.
             </p>
             <a href="#" target="_blank">explore</a>
           </div>
@@ -60,9 +59,9 @@
       <!-- Add Pagination -->
       <div class="swiper-pagination"></div>
     </div>
- 
   </main>
 </template>
+
 
 <script>
 import Swiper, { Navigation, Pagination, Keyboard, Mousewheel, EffectCoverflow } from "swiper";
@@ -113,6 +112,7 @@ export default {
       },
     });
   },
+  
 };
 </script>
 
@@ -263,31 +263,31 @@ main > div > a:hover {
 
 .swiper-slide--one {
   background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    url("https://images.unsplash.com/photo-1628944682084-831f35256163?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
+    url("https://images.ctfassets.net/bth3mlrehms2/ofsSvNeQGdT3Opr9WwWo7/8f800c5aa74502c55ac077c95f781ca3/England__London.jpg?w=2121&h=1193&fl=progressive&q=50&fm=jpg")
       no-repeat 50% 50% / cover;
 }
 
 .swiper-slide--two {
   background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    url("https://images.unsplash.com/photo-1515309025403-4b0184873cef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80")
+    url("https://www.visittheusa.de/sites/default/files/styles/hero_l/public/images/hero_media_image/2016-12/NYC-Underrated-Parks-HERO.jpg?h=7abc3870&itok=Q4bHIuv4")
       no-repeat 50% 50% / cover;
 }
 
 .swiper-slide--three {
   background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    url("https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+    url("https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/800px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg")
       no-repeat 50% 50% / cover;
 }
 
 .swiper-slide--four {
   background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    url("https://images.unsplash.com/photo-1598977123118-4e30ba3c4f5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")
+    url("https://images.prismic.io/visiticeland/d209d40f-ca3d-44c1-9556-816f73b226ad_Reykjavik_Hallgrimskirkja_Autumn_Iceland.jpg?ixlib=gatsbyFP&auto=compress%2Cformat&fit=max&rect=0%2C115%2C1621%2C851&w=1200&h=630")
       no-repeat 50% 50% / cover;
 }
 
 .swiper-slide--five {
   background: linear-gradient(to top, #0f2027, #203a4300, #2c536400),
-    url("https://images.unsplash.com/photo-1570481662006-a3a1374699e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80")
+    url("https://asset-prod.france.fr/petite_france_strasbourg_cedric_schell_f7882cb219.jpg")
       no-repeat 50% 50% / cover;
 }
 

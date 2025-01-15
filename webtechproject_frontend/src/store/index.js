@@ -2,7 +2,10 @@ import { createStore } from 'vuex'
 import axios from 'axios'; // Axios importieren
 
 export default createStore({
-  state: {    
+  state: { 
+    
+    
+    
     isLoggedIn:false,
 
     user: {
