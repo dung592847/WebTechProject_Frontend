@@ -59,7 +59,7 @@ export default {
         {
           city: 'Paris',
           iataCode: 'PAR',
-          description: 'Known as the city of love, Paris captivates visitors with its stunning architecture, art, and culinary delights, from the Eiffel Tower to cozy cafés.',
+          description: 'Known as the city of love, Paris captivates visitors with its stunning architecture, art, and culinary delights, from the Eiffel Tower to cozy cafÃ©s.',
           slideClass: 'three',
           imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/800px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg'
         },
@@ -128,7 +128,7 @@ export default {
       
       this.$store.commit('setUserInput', {
         key: "arrivalAirport",
-        value: `${city} (${iataCode})`
+        value: `(${iataCode})`
       });
       
       // Fetch aviation data
@@ -231,8 +231,28 @@ main {
   height: 28.125rem;
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  align-items: self-start;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.swiper-slide div {
+  display: none;
+  opacity: 0;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  width: 90%;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.swiper-slide-active div {
+  display: block;
+  opacity: 1;
 }
 
 .swiper-slide h2 {
@@ -242,7 +262,6 @@ main {
   font-size: 1.4rem;
   line-height: 1.4;
   margin-bottom: 0.625rem;
-  padding: 0 0 0 1.563rem;
   text-transform: uppercase;
 }
 
@@ -250,17 +269,16 @@ main {
   color: #dadada;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  padding: 0 1.563rem;
   line-height: 1.6;
   font-size: 0.75rem;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 .swiper-slide button {
-  margin: 1.25rem 1.563rem 3.438rem 1.563rem;
   padding: 0.75rem 2.5rem;
   font-size: 1.1rem;
   background: #fff;
@@ -276,17 +294,6 @@ main {
 .swiper-slide button:hover {
   color: #005baa;
   transform: scale(1.05);
-}
-
-.swiper-slide div {
-  display: none;
-  opacity: 0;
-  padding-bottom: 0.625rem;
-}
-
-.swiper-slide-active div {
-  display: block;
-  opacity: 1;
 }
 
 .swiper-slide--one {
