@@ -147,16 +147,20 @@ export default {
     },
 
     handleSearch() {
-   this.$store.dispatch('fetchAviationData');
-   this.$store.commit('setUserInput', {
+    if(this.departure_city !="" && this.arrival_city!="" && this.traveller > 0 && this.departure_date!= "") {
+      this.isSearching = true; // Show animation
+      this.$store.dispatch('fetchAviationData');
+      this.$store.commit('setUserInput', {
         key: "traveller",
         value: this.traveller
       });
-   setTimeout(() => {
-      this.$router.push('/search-result');
-   }, 2000);  
-}
-
+      setTimeout(() => {
+        this.$router.push('/search-result');
+      }, 2000); 
+    } else {
+      alert("No empty search allowed ")
+    }
+  },
 
   }
 }
