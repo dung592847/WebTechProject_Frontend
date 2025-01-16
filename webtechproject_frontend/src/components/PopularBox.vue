@@ -16,7 +16,7 @@
             <p>
               Experience the vibrant culture, historic landmarks like Big Ben, and the charm of London's bustling streets. A city where tradition meets modernity.
             </p>
-            <a href="#" target="_blank">explore</a>
+            <button @click="exploreDestination('London', 'LON')">explore</button>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--two">
@@ -25,7 +25,7 @@
             <p>
               The city that never sleeps offers world-class dining, shopping, and iconic attractions such as Times Square and the Statue of Liberty.
             </p>
-            <a href="#" target="_blank">explore</a>
+            <button @click="exploreDestination('New York', 'NYC')">explore</button>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--three">
@@ -34,7 +34,7 @@
             <p>
               Known as the city of love, Paris captivates visitors with its stunning architecture, art, and culinary delights, from the Eiffel Tower to cozy cafés.
             </p>
-            <a href="#" target="_blank">explore</a>
+            <button @click="exploreDestination('Paris', 'PAR')">explore</button>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--four">
@@ -43,7 +43,7 @@
             <p>
               Discover the magic of Iceland's capital, with its geothermal wonders, vibrant arts scene, and breathtaking landscapes just outside the city.
             </p>
-            <a href="#" target="_blank">explore</a>
+            <button @click="exploreDestination('Reykjavik', 'REY')">explore </button>
           </div>
         </div>
         <div class="swiper-slide swiper-slide--five">
@@ -52,7 +52,7 @@
             <p>
               A charming blend of French and German influences, Strasbourg enchants with its half-timbered houses, canals, and famous Christmas market.
             </p>
-            <a href="#" target="_blank">explore</a>
+            <button @click="exploreDestination('Strasbourg', 'STR')">explore</button>
           </div>
         </div>
       </div>
@@ -112,6 +112,25 @@ export default {
       },
     });
   },
+  methods: {
+    exploreDestination(city, iataCode) {
+      // Daten in den Store setzen
+      this.$store.commit('setUserInput', {
+        key: "departureAirport",
+        value: "Your City (XYZ)", // Beispiel für eine Default-Stadt
+      });
+      this.$store.commit('setUserInput', {
+        key: "arrivalAirport",
+        value: `${city} (${iataCode})`,
+      });
+      
+      // Automatische Suche ausführen
+      this.$store.dispatch('fetchAviationData');
+      
+      // Zur Suchergebnisseite navigieren
+      this.$router.push('/search-result');
+    }
+  }
   
 };
 </script>
