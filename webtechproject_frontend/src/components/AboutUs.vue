@@ -2,10 +2,8 @@
     <div class="about-container">
         <div class="labelText">
             <h1>Meet our Team</h1>
-            <p>Lorem ipsum dolor sit, amet consectetur 
-              adipisicing elit. Eveniet, vero illum eaque 
-              aliquid quisquam 
-            </p>
+            <p>Get to know the talented individuals behind our success. We are a passionate team committed to delivering exceptional results and making an impact.</p>
+
         </div>
     <div class="dev-boxes">
         <div class="dev-one">

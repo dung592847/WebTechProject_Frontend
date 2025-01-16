@@ -1,100 +1,62 @@
 <template>
 
-<div class="nav-box">
-  <NavHeader></NavHeader>
-</div>
-<AboutUs></AboutUs>
-
-  <div class="wrapper">
-    <h1>Our Services</h1>
-    <p>Lorem ipsum dolor sit, amet consectetur 
-      adipisicing elit. Eveniet, vero illum eaque 
-      aliquid quisquam 
-    </p>
-    <div class="content-box">
-      <div class="card">
-        
-        <h2>Flight Booking</h2>
-        <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-          perspiciatis id vel voluptatibus odit, illo dolor enim! 
-          Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-          </p>
+  <div class="nav-box">
+    <NavHeader></NavHeader>
+  </div>
+  <AboutUs></AboutUs>
+  
+    <div class="wrapper">
+      <h1>Our Services</h1>
+      <p>We offer a wide range of services to ensure that your travel experience is as seamless and enjoyable as possible. Whether you're booking a flight, finding exclusive discounts, or need support, we've got you covered!</p>
+      <div class="content-box">
+        <div class="card">
+          <h2>Flight Booking</h2>
+          <p>Book flights quickly and easily with our platform. We offer a wide variety of destinations, airlines, and flexible schedules to fit your needs.</p>
+        </div>
+  
+        <div class="card">
+          <h2>Exclusive Discounts</h2>
+          <p>Take advantage of exclusive discounts and offers on flights, hotels, and more. Our platform provides unbeatable deals for your travel plans.</p>
+        </div>
+  
+        <div class="card">
+          <h2>24/7 Support</h2>
+          <p>Our dedicated support team is available 24/7 to assist you with any inquiries or issues. We're here to make sure your travel experience is smooth from start to finish.</p>
+        </div>
+  
+        <div class="card">
+          <h2>Popular Flights</h2>
+          <p>Explore popular flight routes to your favorite destinations. We provide easy access to the most sought-after destinations worldwide.</p>
+        </div>
+  
+        <div class="card">
+          <h2>Consultation</h2>
+          <p>Need help choosing the right flight? Our travel experts are available to provide personalized recommendations and advice tailored to your preferences.</p>
+        </div>
+  
+        <div class="card">
+          <h2>Flight Roulette</h2>
+          <p>Take a chance with our Flight Roulette feature! Let us surprise you with exciting and affordable flight options to unique destinations.</p>
+        </div>
+  
+        <div class="card">
+          <h2>Email Notifications</h2>
+          <p>Stay updated with the latest offers and flight deals by signing up for our email notifications. We’ll keep you informed of the best travel opportunities.</p>
+        </div>
+  
+        <div class="card">
+          <h2>Filter Options</h2>
+          <p>Our advanced filter options allow you to search for flights based on various preferences such as price, departure time, and more. Find the best options for your trip.</p>
+        </div>
       </div>
-
-      <div class="card">
-       
-        <h2>Exclusive Discounts</h2>
-        <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-          perspiciatis id vel voluptatibus odit, illo dolor enim! 
-          Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-          </p>
-      </div>
-
-      <div class="card">
-        
-        <h2>24/7 Support</h2>
-        <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-          perspiciatis id vel voluptatibus odit, illo dolor enim! 
-          Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-          </p>
-      </div>
-
-      <div class="card">
-       
-        <h2>
-          Popular Flights
-        </h2>
-        <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-          perspiciatis id vel voluptatibus odit, illo dolor enim! 
-          Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-         </p>
-      </div>
-
-      <div class="card">
-       
-        <h2>Consultation</h2>
-        <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-          perspiciatis id vel voluptatibus odit, illo dolor enim! 
-          Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-          </p>
-      </div>
-
-      
-
-      <div class="card">
-     
-        <h2>Flight Roulette</h2>
-        <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-          perspiciatis id vel voluptatibus odit, illo dolor enim! 
-          Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-          </p>
-      </div>
-
-      <div class="card">
-       
-       <h2>Email Notifications</h2>
-       <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-         perspiciatis id vel voluptatibus odit, illo dolor enim! 
-         Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-         </p>
-     </div>
-
-     <div class="card">
-       
-       <h2>Filter Options</h2>
-       <p> Reprehenderit dolore totam ex dolorum labore pariatur 
-         perspiciatis id vel voluptatibus odit, illo dolor enim! 
-         Eaque tempore, unde odit ab cumque quis fugiat dolorem 
-         </p>
-     </div>
+    
     </div>
   
-  </div>
-
-  <div class="separator"></div>
-
-<FooterComponent></FooterComponent>
-</template>
+    <div class="separator"></div>
+  
+  <FooterComponent></FooterComponent>
+  </template>
+  
 
 <script >
 // @ is an alias to /src
