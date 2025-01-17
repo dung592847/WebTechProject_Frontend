@@ -1,2 +1,0 @@
-# Flight Booking Web Application - Frontend Repository
-This frontend web application is developed as part of a university project to demonstrate the practical application of modern web development techniques. It is designed to provide users with an intuitive interface for searching, comparing, and booking flights. The frontend interacts seamlessly with the backend to deliver flight information and booking functionalities, similar to popular platforms like Booking.com or Fluege.de.
